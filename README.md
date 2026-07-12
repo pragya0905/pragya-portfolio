@@ -147,7 +147,8 @@ Implemented with Tailwind v4's CSS-first `@theme` and plain CSS custom propertie
 `src/components/layout/ContactForm.jsx`:
 
 - Client-side email validation via a regex (`EMAIL_PATTERN`), checked on blur and on submit; shows an inline error and blocks submission rather than relying solely on the browser's native `type="email"` validation.
-- On submit, POSTs `{ access_key, name, email, message }` to `https://api.web3forms.com/submit`. `WEB3FORMS_ACCESS_KEY` lives directly in `src/data/content.js` — it's not a secret (Web3Forms keys are designed to be public/client-exposed, similar to a Stripe publishable key), so it isn't loaded from an env file.
+- Honeypot spam filter: a `botcheck` checkbox field is rendered off-screen (`display: none`, `tabIndex={-1}`, `aria-hidden`) — invisible to real visitors but often filled in by bots that programmatically fill every form field. If it's checked on submit, the form shows the normal success state but the request is dropped before ever calling Web3Forms.
+- On submit, POSTs `{ access_key, name, email, message, botcheck }` to `https://api.web3forms.com/submit`. `WEB3FORMS_ACCESS_KEY` lives directly in `src/data/content.js` — it's not a secret (Web3Forms keys are designed to be public/client-exposed, similar to a Stripe publishable key), so it isn't loaded from an env file.
 - UI is a small state machine (`idle` → `sending` → `sent` | `error`) driving the submit button's disabled state and the success/error message shown.
 - After the Web3Forms request settles (success or failure), fires `reportContactMetric(status)` — a `fetch()` to the API Gateway endpoint in `CONTACT_METRIC_URL`, wrapped in `.catch(() => {})` so a metrics failure is silent and never surfaces to the user.
 - If `WEB3FORMS_ACCESS_KEY` is unset, the form falls back to a `mailto:` link with the message pre-filled, instead of the fetch-based submit.
@@ -165,7 +166,8 @@ Implemented with Tailwind v4's CSS-first `@theme` and plain CSS custom propertie
 
 - Fully responsive layout — verified at 375px (mobile), 768px (tablet), and 1920px (desktop) in both themes
 - Light/dark theme toggle, defaults to OS preference, persisted across visits, no flash-of-wrong-theme on load
-- Working contact form (Web3Forms) with client-side validation and distinct success/error states
+- Working contact form (Web3Forms) with client-side validation, honeypot spam filtering, and distinct success/error states
+- Contact email address shown directly in the footer, in addition to the mailto icon link
 - SEO metadata: title/description/keywords, canonical URL, Open Graph + Twitter Card tags, JSON-LD `Person` structured data, a generated 1200×630 social preview image, and a full favicon set
 - Google Analytics 4 event tracking: page views, per-section view events, resume-download clicks, "Hire Me" clicks
 - Custom CloudWatch metric for contact-form success/failure, shown on an infra-health dashboard alongside CloudFront's request/error/latency/cache-hit-rate metrics
