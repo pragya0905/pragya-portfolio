@@ -1,6 +1,6 @@
 export const PROFILE = {
   name: "Pragya Kumari",
-  title: "Software Development Engineer | Backend & Cloud",
+  title: "Software Development Engineer | Full Stack & Cloud",
   location: "Hyderabad, India",
   tagline:
     "I build cloud-native platforms and Amazon-scale backend systems — from RESTful APIs that cut fraud by millions to founding the engineering of a D2C e-commerce platform from scratch.",
@@ -229,7 +229,7 @@ export const SKILLS = [
   },
   {
     category: "Frontend",
-    items: ["React.js", "JavaScript", "TypeScript", "Material UI", "Tailwind CSS"],
+    items: ["React", "JavaScript", "HTML/CSS", "TypeScript", "Material UI", "Tailwind CSS"],
   },
   {
     category: "Data & Machine Learning",

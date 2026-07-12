@@ -20,6 +20,7 @@ function reportContactMetric(status) {
 
 export function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [botcheck, setBotcheck] = useState(false);
   const [status, setStatus] = useState("idle");
   const [emailTouched, setEmailTouched] = useState(false);
 
@@ -33,6 +34,16 @@ export function ContactForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Honeypot: real visitors never see or fill this field, so a checked
+    // value means a bot filled every field programmatically. Silently drop
+    // it rather than calling Web3Forms at all.
+    if (botcheck) {
+      setStatus("sent");
+      setForm({ name: "", email: "", message: "" });
+      setEmailTouched(false);
+      return;
+    }
 
     if (!emailValid) {
       setEmailTouched(true);
@@ -51,7 +62,7 @@ export function ContactForm() {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ access_key: WEB3FORMS_ACCESS_KEY, ...form }),
+        body: JSON.stringify({ access_key: WEB3FORMS_ACCESS_KEY, ...form, botcheck }),
       });
       if (!response.ok) throw new Error("Request failed");
       setStatus("sent");
@@ -66,6 +77,20 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="mx-auto mt-10 max-w-xl space-y-4 text-left">
+      {/* Honeypot: invisible to real visitors, catches bots that fill every
+          form field programmatically. See Web3Forms' honeypot convention —
+          field must be named "botcheck". */}
+      <input
+        type="checkbox"
+        name="botcheck"
+        checked={botcheck}
+        onChange={(event) => setBotcheck(event.target.checked)}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ display: "none" }}
+      />
+
       <div>
         <label htmlFor="contact-name" className="mb-1.5 block text-sm text-muted">
           Name

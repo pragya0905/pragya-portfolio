@@ -38,7 +38,14 @@ export function Footer() {
           <IconLink href={SOCIAL_LINKS.github} icon={GithubIcon} label="GitHub" />
         </div>
 
-        <p className="mt-16 font-mono text-xs text-faint">
+        <p className="mt-6 text-sm text-muted">
+          Or email directly:{" "}
+          <a href={`mailto:${SOCIAL_LINKS.email}`} className="text-accent hover:underline">
+            {SOCIAL_LINKS.email}
+          </a>
+        </p>
+
+        <p className="mt-10 font-mono text-xs text-faint">
           © {new Date().getFullYear()} {PROFILE.name}. Built with React &amp; AWS
         </p>
       </div>
