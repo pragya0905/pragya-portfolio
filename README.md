@@ -34,11 +34,13 @@ Verified against `package.json` and the codebase.
 **Third-party services**
 - [Web3Forms](https://web3forms.com/) — contact form email delivery (no backend required)
 - [Google Analytics 4](https://analytics.google.com/) — visitor/behavior analytics
+- [Anthropic API](https://www.anthropic.com/) (Claude Haiku 4.5) — powers the chat widget's reasoning and tool use
 
 **Infrastructure (AWS)**
 - **S3** — static file hosting (bucket: `pragya-kumari-portfolio-91f561f4`)
 - **CloudFront** — CDN in front of the S3 bucket (distribution: `E1WR599BU3HA0G`)
-- **API Gateway + Lambda** — a small endpoint (`portfolio-contact-metric`) that publishes a custom CloudWatch metric on contact-form submission
+- **API Gateway + Lambda** — two endpoints on one HTTP API (`sqhjzyzhw2`): `portfolio-contact-metric` (publishes a custom CloudWatch metric on contact-form submission) and `portfolio-chatbot` (proxies chat requests to the Anthropic API and runs the tool-use loop)
+- **DynamoDB** — `portfolio-chatbot-ratelimit`, a per-IP fixed-window rate limiter for the chatbot endpoint (on-demand billing, TTL-expired items)
 - **CloudWatch** — dashboard (`Portfolio-Infra-Health`) combining CloudFront's built-in metrics with the custom contact-form metric
 
 ---
@@ -98,6 +100,38 @@ Lambda ──▶ CloudWatch (custom: ContactFormSubmission, success/error)
 
 **Why this shape:** GA4 answers *visitor-behavior* questions (who's here, what are they doing) and is purpose-built for that; CloudWatch answers *infrastructure-health* questions (is the CDN erroring, is origin latency spiking) using metrics CloudFront already emits for free. The one custom CloudWatch metric (contact-form success/failure) is the single piece of "application health" data worth having next to the infra metrics, so it's folded into the same dashboard rather than living only in GA4.
 
+### 4. Chatbot flow
+
+A small agent, not a wrapped LLM call — most predictable questions never reach an API at all:
+
+```
+User message
+  │
+  ▼
+FAQ layer (src/data/chatbotFaq.js, client-side, zero network call)
+  │  match? ──▶ instant canned reply (+ optional client action)
+  │  no match
+  ▼
+POST /chat ──▶ Lambda (portfolio-chatbot)
+                 │
+                 ├─ DynamoDB rate-limit check (per IP, fixed window) ──▶ 429 if over
+                 │
+                 └─ Anthropic Messages API (Claude Haiku 4.5)
+                      system prompt = full knowledge base (lambda/chatbot/knowledge.js)
+                      tools = [get_project_case_study, scroll_to_section, download_resume]
+                      │
+                      ├─ stop_reason "end_turn" ──▶ return text to the widget
+                      │
+                      ├─ tool_use: get_project_case_study (server tool)
+                      │    resolved inside the Lambda, loop continues automatically
+                      │
+                      └─ tool_use: scroll_to_section / download_resume (client tool)
+                           returned to the browser ──▶ widget executes the action
+                           ──▶ POSTs a tool_result back to /chat ──▶ Claude continues
+```
+
+**Why this shape:** the client/server tool split is the core design decision — some things (fetching deeper background detail) can be resolved entirely on the backend and looped invisibly, but scrolling the page or triggering a file download can only happen in the browser, so the backend hands control back and picks the conversation up again once the frontend reports the action is done. The FAQ layer exists purely for cost/latency: the handful of questions every visitor asks (hello, resume, tech stack) are answered for free before an API call is even considered. Rate limiting is DynamoDB-based rather than AWS WAF specifically to avoid WAF's flat monthly base fee, which isn't worth it at this traffic scale; the real backstop against a runaway bill is a spend cap set directly on the Anthropic API key, independent of any bug in the app-level limiter.
+
 ---
 
 ## Low-Level Design (LLD)
@@ -111,14 +145,16 @@ src/
 ├── index.css                   # Tailwind v4 @theme tokens, light/dark overrides, global utilities
 ├── data/
 │   ├── content.js               # Single source of truth for all copy/links/config
-│   └── skillIcons.js            # Skill name → icon component + brand color map
+│   ├── skillIcons.js            # Skill name → icon component + brand color map
+│   └── chatbotFaq.js            # Client-side FAQ pattern-matching layer for the chat widget
 ├── lib/
 │   └── analytics.js             # trackEvent() wrapper around window.gtag
 ├── hooks/
 │   ├── useTheme.js              # Theme state (see below)
 │   ├── useInView.js             # IntersectionObserver → boolean, used for scroll-reveal
 │   ├── useScrolled.js           # Navbar background-on-scroll trigger
-│   └── useActiveSection.js      # Tracks which section is in view, for nav highlighting
+│   ├── useActiveSection.js      # Tracks which section is in view, for nav highlighting
+│   └── useChat.js               # Chat message state, FAQ short-circuit, backend + tool-loop calls
 └── components/
     ├── layout/                  # Navbar, Footer, Layout, Section, ParticleBackground, ContactForm
     ├── hero/                    # Hero, FloatingSocialIcons
@@ -126,7 +162,16 @@ src/
     ├── projects/                 # Projects, ProjectCard
     ├── skills/                   # Skills, SkillIconCard
     ├── certifications/           # Certifications, CertificationCard
+    ├── chatbot/                  # ChatWidget (avatar trigger + panel), ChatMessage
     └── ui/                       # Button, Tag, IconLink, MetricStat, Reveal, BrandIcons
+
+lambda/                          # Standalone Lambda source, zip-deployed (no shared build with the Vite app)
+├── contact-metric/               # index.mjs — publishes the contact-form CloudWatch metric
+└── chatbot/
+    ├── index.mjs                 # Handler: rate limit → Anthropic call → tool-use loop
+    ├── context.js                 # System prompt (imports knowledge.js) + case-study tool content
+    ├── knowledge.js                # Full factual knowledge base, sourced from the resume + content.js
+    └── tools.js                    # Tool schemas + server-tool executor
 ```
 
 Every section (`Experience`, `Projects`, `Skills`, `Certifications`) is wrapped in the shared `Section` component, which owns the scroll-reveal (`useInView`) and fires the `section_view` analytics event. `Footer` (which renders the Contact section) duplicates this wiring directly since it doesn't use `Section`.
@@ -153,6 +198,22 @@ Implemented with Tailwind v4's CSS-first `@theme` and plain CSS custom propertie
 - After the Web3Forms request settles (success or failure), fires `reportContactMetric(status)` — a `fetch()` to the API Gateway endpoint in `CONTACT_METRIC_URL`, wrapped in `.catch(() => {})` so a metrics failure is silent and never surfaces to the user.
 - If `WEB3FORMS_ACCESS_KEY` is unset, the form falls back to a `mailto:` link with the message pre-filled, instead of the fetch-based submit.
 
+### Chatbot
+
+`src/hooks/useChat.js` + `src/components/chatbot/`:
+
+- Holds the full Anthropic-format `messages` array in a ref (no database — conversations are short, and the whole point is a stateless Lambda behind a static site, matching the rest of this repo's infra philosophy).
+- `sendMessage()` checks `matchFaq()` first; a match renders instantly and, if it has an associated action (e.g. a resume request), runs it directly — no backend call at all.
+- On a miss, POSTs to `/chat` and drives the client-tool round trip: if the Lambda returns `status: "needs_client_action"`, the widget runs the action (`scroll_to_section` / `download_resume`, defined in a small `CLIENT_ACTIONS` map) and POSTs a `tool_result` back so Claude can continue, capped at a few round trips to avoid a runaway loop.
+- `ChatWidget.jsx` is the floating avatar trigger + panel; `ChatMessage.jsx` renders a single bubble. The trigger button shows a small pulsing ring (`@utility chat-trigger-pulse` in `index.css`, disabled under `prefers-reduced-motion`) and a notification dot that clears once the widget has been opened.
+
+`lambda/chatbot/`:
+
+- `index.mjs` checks the DynamoDB rate limit (`event.requestContext.http.sourceIp` — this is an HTTP API v2 field; the older `identity.sourceIp` from REST APIs doesn't exist here), then calls the Anthropic Messages API with `context.js`'s system prompt and `tools.js`'s tool schemas.
+- Tool calls are split by name: `get_project_case_study` is a **server tool**, resolved locally against `context.js`'s `CASE_STUDIES` and looped back to Anthropic automatically (invisible to the frontend); `scroll_to_section`/`download_resume` are **client tools**, returned to the browser to execute.
+- The system prompt is grounded by `knowledge.js` — a full factual knowledge base (work history, education, every project, full skills list, certifications) sourced directly from the resume PDF and `src/data/content.js`, so most factual questions never need a tool call at all. `CASE_STUDIES` in `context.js` is reserved for narrative/"why" questions (why she left Amazon, how the CloudWatch dashboard works) rather than facts.
+- Prompt caching (`cache_control` on the system block) is wired in but doesn't currently engage — the system prompt sits under Haiku 4.5's ~4,096-token caching floor even with the full knowledge base, verified via the API's own `cache_read_input_tokens` in the response rather than assumed. Cost impact of no caching is negligible at this traffic volume (roughly $0.003–0.004 per conversation turn).
+
 ### Other implementation notes
 
 - **Scroll-reveal**: `useInView` (IntersectionObserver, fires once) toggles a `reveal`/`is-visible` utility class pair (see the `@utility reveal` block in `index.css`) for a fade/slide-in on scroll; respects `prefers-reduced-motion`.
@@ -174,6 +235,7 @@ Implemented with Tailwind v4's CSS-first `@theme` and plain CSS custom propertie
 - Animated, theme-aware constellation particle background
 - Scroll-triggered reveal animations, reduced-motion aware throughout
 - Resume download button in the navbar (currently active); the code renders it disabled/greyed-out automatically if `resumeUrl` is ever unset, instead of linking to a missing file
+- Chat widget: a free client-side FAQ layer for predictable questions, backed by a Claude Haiku 4.5 agent (Lambda + API Gateway) for everything else, with real tool use — some tools resolved server-side, others (page scroll, resume download) handed back to the browser to execute. Per-IP rate limited and grounded in a full knowledge base sourced from the resume and site content.
 
 ---
 
@@ -187,19 +249,23 @@ npm run preview   # locally preview the production build
 npm run lint      # run oxlint
 ```
 
-No environment variables are required to run locally — the Web3Forms key and analytics IDs are committed directly in `src/data/content.js`/`index.html` (see [Contact form](#contact-form) for why).
+No environment variables are required to run locally — the Web3Forms key and analytics IDs are committed directly in `src/data/content.js`/`index.html` (see [Contact form](#contact-form) for why). The chatbot's `ANTHROPIC_API_KEY` lives only as a Lambda environment variable in AWS, never in the repo or the frontend bundle — the widget always talks to `/chat`, never to Anthropic directly.
 
 ---
 
 ## Deployment
 
 ```bash
-npm run deploy
+npm run deploy              # frontend: build + sync to S3 + invalidate CloudFront
+npm run deploy:chatbot      # zip + update the portfolio-chatbot Lambda
+npm run deploy:contact-metric   # zip + update the portfolio-contact-metric Lambda
 ```
 
-This runs, in order:
+`npm run deploy` runs, in order:
 1. `vite build` — production build to `dist/`
 2. `aws s3 sync dist/ s3://pragya-kumari-portfolio-91f561f4/ --delete` — sync to the S3 origin, removing stale files
 3. `aws cloudfront create-invalidation --distribution-id E1WR599BU3HA0G --paths '/*'` — invalidate the CDN cache so changes go live immediately instead of waiting for cached objects to expire
 
-Requires the AWS CLI configured locally with credentials that have S3 write and CloudFront invalidation permissions.
+The two `deploy:*` scripts zip their respective `lambda/<name>/` folder and run `aws lambda update-function-code` — there's no build step, since both functions are plain `.mjs` with no bundled dependencies (Node 20.x's managed runtime already includes the AWS SDK v3 clients they use).
+
+Requires the AWS CLI configured locally with credentials that have S3 write, CloudFront invalidation, and Lambda update permissions.
