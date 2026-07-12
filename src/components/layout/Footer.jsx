@@ -1,13 +1,23 @@
+import { useEffect } from "react";
 import { Mail } from "lucide-react";
 import { PROFILE, SOCIAL_LINKS } from "../../data/content";
-import { Button } from "../ui/Button";
+import { useInView } from "../../hooks/useInView";
+import { trackEvent } from "../../lib/analytics";
 import { IconLink } from "../ui/IconLink";
 import { GithubIcon, LinkedinIcon } from "../ui/BrandIcons";
+import { ContactForm } from "./ContactForm";
 
 export function Footer() {
+  const [ref, inView] = useInView();
+
+  useEffect(() => {
+    if (inView) trackEvent("section_view", { section_id: "contact" });
+  }, [inView]);
+
   return (
     <footer
       id="contact"
+      ref={ref}
       role="contentinfo"
       className="scroll-mt-24 border-t border-line py-24"
     >
@@ -20,21 +30,16 @@ export function Footer() {
           let&rsquo;s talk.
         </p>
 
-        <div className="mt-8 flex justify-center">
-          <Button as="a" href={`mailto:${SOCIAL_LINKS.email}`}>
-            <Mail className="h-4 w-4" aria-hidden="true" />
-            {SOCIAL_LINKS.email}
-          </Button>
-        </div>
+        <ContactForm />
 
-        <div className="mt-8 flex justify-center gap-4">
+        <div className="mt-10 flex justify-center gap-4">
           <IconLink href={`mailto:${SOCIAL_LINKS.email}`} icon={Mail} label="Email" />
           <IconLink href={SOCIAL_LINKS.linkedin} icon={LinkedinIcon} label="LinkedIn" />
           <IconLink href={SOCIAL_LINKS.github} icon={GithubIcon} label="GitHub" />
         </div>
 
         <p className="mt-16 font-mono text-xs text-faint">
-          © {new Date().getFullYear()} {PROFILE.name} — built with React &amp; Tailwind
+          © {new Date().getFullYear()} {PROFILE.name}. Built with React &amp; AWS
         </p>
       </div>
     </footer>

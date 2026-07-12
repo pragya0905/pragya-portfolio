@@ -2,24 +2,49 @@
 @import "@fontsource-variable/inter";
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/orbitron/700.css";
+@import "@fontsource/orbitron/900.css";
 
 @theme {
   --font-sans: "InterVariable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Orbitron", ui-sans-serif, system-ui, sans-serif;
 
-  --color-canvas: #0a0f1a;
-  --color-surface: #111827;
+  --color-canvas: #050505;
+  --color-surface: #0d0f12;
   --color-line: #1f2937;
   --color-ink: #e5e7eb;
   --color-muted: #94a3b8;
   --color-faint: #7c8ba1;
   --color-accent: #22d3ee;
   --color-accent-dim: #22d3ee1a;
+  --color-glow: #22d3ee;
+  --color-shadow: rgba(0, 0, 0, 0.6);
+  --color-photo-bg: #0d0f12;
+}
+
+[data-theme="light"] {
+  --color-canvas: #f1f5f9;
+  --color-surface: #ffffff;
+  --color-line: #e2e8f0;
+  --color-ink: #0f172a;
+  --color-muted: #475569;
+  --color-faint: #64748b;
+  --color-accent: #0891b2;
+  --color-accent-dim: #0891b224;
+  --color-glow: #0891b240;
+  --color-shadow: rgba(15, 23, 42, 0.08);
+  --color-photo-bg: var(--color-ink);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  [data-theme="light"] {
+    color-scheme: light;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -30,6 +55,17 @@
 
   body {
     @apply bg-canvas text-ink font-sans antialiased;
+  }
+
+  [data-theme="light"] body {
+    background-image: linear-gradient(180deg, #ffffff 0%, var(--color-canvas) 100%);
+  }
+
+  [data-theme="light"] .bg-surface,
+  [data-theme="light"] .bg-surface\/60 {
+    box-shadow:
+      0 1px 2px -1px var(--color-shadow),
+      0 4px 16px -8px var(--color-shadow);
   }
 }
 
@@ -42,5 +78,28 @@
 
   @media (prefers-reduced-motion: reduce) {
     @apply opacity-100 translate-y-0 transition-none;
+  }
+}
+
+@utility accent-highlight {
+  font-family: var(--font-display);
+  color: var(--color-accent);
+}
+
+@utility float-glow {
+  animation: float 3.6s ease-in-out infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
   }
 }

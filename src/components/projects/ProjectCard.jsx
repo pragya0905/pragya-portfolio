@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { ArrowUpRight } from "lucide-react";
 import { Tag } from "../ui/Tag";
 import { GithubIcon } from "../ui/BrandIcons";
@@ -6,11 +7,20 @@ export function ProjectCard({ title, context, description, metrics, tags, links 
   const hasLinks = links.github || links.demo;
 
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-line bg-surface p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+    <div
+      className={clsx(
+        "group flex h-full flex-col rounded-2xl border border-line bg-surface p-8",
+        "transition-all duration-300 ease-out",
+        "hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-[0_0_40px_-12px_var(--color-glow)]",
+        "motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+      )}
+    >
       <p className="mb-2 font-mono text-xs uppercase tracking-wide text-faint">
         {context}
       </p>
-      <h3 className="text-lg font-bold text-ink">{title}</h3>
+      <h3 className="text-lg font-bold text-ink transition-colors duration-300 group-hover:text-accent">
+        {title}
+      </h3>
       <p className="mt-3 flex-1 text-sm text-muted">{description}</p>
 
       <div className="mt-6 flex flex-wrap gap-2">

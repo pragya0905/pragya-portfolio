@@ -1,33 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import clsx from "clsx";
+import { useInView } from "../../hooks/useInView";
+import { trackEvent } from "../../lib/analytics";
 
-function useInView() {
-  const ref = useRef(null);
-  const [inView, setInView] = useState(false);
+export function Section({ id, eyebrow, heading, highlight, children, className }) {
+  const [ref, inView] = useInView();
 
   useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  return [ref, inView];
-}
-
-export function Section({ id, eyebrow, heading, children, className }) {
-  const [ref, inView] = useInView();
+    if (inView) trackEvent("section_view", { section_id: id });
+  }, [inView, id]);
 
   return (
     <section
@@ -50,6 +31,12 @@ export function Section({ id, eyebrow, heading, children, className }) {
                 className="text-3xl font-bold tracking-tight text-ink md:text-4xl"
               >
                 {heading}
+                {highlight && (
+                  <>
+                    {" - "}
+                    <span className="accent-highlight">{highlight}</span>
+                  </>
+                )}
               </h2>
             )}
           </div>

@@ -1,4 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
-  <rect width="48" height="48" rx="10" fill="#0a0f1a" />
-  <text x="24" y="31" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="18" font-weight="600" fill="#22d3ee">PK</text>
+  <rect width="48" height="48" rx="10" fill="#050505" />
+  <text x="24" y="31" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="900" letter-spacing="1" fill="#22d3ee">PJ</text>
 </svg>

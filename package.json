@@ -7,16 +7,25 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "vite build && aws s3 sync dist/ s3://pragya-kumari-portfolio-91f561f4/ --delete && aws cloudfront create-invalidation --distribution-id E1WR599BU3HA0G --paths '/*'"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",
     "@fontsource/jetbrains-mono": "^5.2.8",
+    "@fontsource/orbitron": "^5.2.8",
     "@tailwindcss/vite": "^4.3.2",
+    "@tsparticles/engine": "^4.3.1",
+    "@tsparticles/react": "^4.3.1",
+    "@tsparticles/slim": "^4.3.1",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.42.2",
+    "gsap": "^3.15.0",
     "lucide-react": "^1.23.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-icons": "^5.7.0",
+    "react-type-animation": "^3.2.0",
     "tailwindcss": "^4.3.2"
   },
   "devDependencies": {
