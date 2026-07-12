@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "deploy": "vite build && aws s3 sync dist/ s3://pragya-kumari-portfolio-91f561f4/ --delete && aws cloudfront create-invalidation --distribution-id E1WR599BU3HA0G --paths '/*'"
+    "deploy": "vite build && aws s3 sync dist/ s3://pragya-kumari-portfolio-91f561f4/ --delete && aws cloudfront create-invalidation --distribution-id E1WR599BU3HA0G --paths '/*'",
+    "deploy:contact-metric": "cd lambda/contact-metric && zip -q -r function.zip index.mjs && aws lambda update-function-code --function-name portfolio-contact-metric --zip-file fileb://function.zip && rm function.zip",
+    "deploy:chatbot": "cd lambda/chatbot && zip -q -r function.zip index.mjs context.js tools.js knowledge.js && aws lambda update-function-code --function-name portfolio-chatbot --zip-file fileb://function.zip && rm function.zip"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",

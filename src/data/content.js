@@ -35,6 +35,10 @@ export const WEB3FORMS_ACCESS_KEY = "d5a29e46-7043-4f58-b648-81e401cdd61e";
 // health shows up on the infra dashboard alongside CloudFront's own metrics.
 export const CONTACT_METRIC_URL = "https://sqhjzyzhw2.execute-api.ap-southeast-2.amazonaws.com/";
 
+// Backs the chat widget (see src/hooks/useChat.js) — same API Gateway as
+// CONTACT_METRIC_URL, on its own explicit /chat route.
+export const CHATBOT_API_URL = "https://sqhjzyzhw2.execute-api.ap-southeast-2.amazonaws.com/chat";
+
 export const NAV_LINKS = [
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
