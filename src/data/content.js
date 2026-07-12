@@ -129,18 +129,23 @@ export const EXPERIENCE = [
     achievements: [
       {
         description:
-          "Architected backend services and APIs in Java and AWS to streamline FCSKU-level inventory removals across 100+ fulfillment centers.",
+          "Architected backend services and APIs in Java and AWS to streamline FCSKU-level inventory removals across 100+ fulfillment centers, cutting return mismatches by 95%.",
         metric: { value: "$5.5M", label: "annual fraud reduction" },
       },
       {
         description:
-          "Redesigned complex SQL queries and implemented distributed caching to reduce database load and improve latency.",
+          "Redesigned complex SQL queries and implemented distributed caching to reduce database load and improve API latency by 30%.",
         metric: { value: "40-60%", label: "reduction in database load" },
       },
       {
         description:
-          "Led rigorous design reviews and PRC (peer review committee) to harden service reliability.",
+          "Led rigorous design reviews and PRC (peer review committee) to harden service reliability and speed up release cycles by 20%.",
         metric: { value: "25%", label: "boost in service reliability" },
+      },
+      {
+        description:
+          "Resolved critical production failures and edge-case service crashes, improving overall system stability.",
+        metric: { value: "~5%", label: "fatal error rate after fixes" },
       },
     ],
     techStack: ["Java", "AWS", "SQL", "Distributed Caching"],
