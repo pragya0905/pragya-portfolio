@@ -20,12 +20,10 @@ export const PROFILE = {
   initials: "PK",
 };
 
-// TODO: add your GitHub profile URL once ready — the Navbar and Footer
-// automatically render the GitHub link the moment this is non-null.
 export const SOCIAL_LINKS = {
   email: "kmpragya052000@gmail.com",
   linkedin: "https://www.linkedin.com/in/pragya58/",
-  github: null,
+  github: "https://github.com/pragya0905",
   resumeUrl: "/resume/Pragya_Kumari_Resume.pdf",
 };
 

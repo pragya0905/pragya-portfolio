@@ -64,5 +64,5 @@ export const KNOWLEDGE_BASE = `
 - Python for Everybody — University of Michigan (via Coursera)
 
 ## Contact
-Email: kmpragya052000@gmail.com. LinkedIn: linkedin.com/in/pragya58. Based in Hyderabad, India. Open to full-stack and cloud engineering opportunities.
+Email: kmpragya052000@gmail.com. LinkedIn: linkedin.com/in/pragya58. GitHub: github.com/pragya0905. Based in Hyderabad, India. Open to full-stack and cloud engineering opportunities.
 `;
