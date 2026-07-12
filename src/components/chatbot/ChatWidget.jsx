@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MessageCircle, Send, X } from "lucide-react";
+import { Send, X } from "lucide-react";
 import clsx from "clsx";
 import { useChat } from "../../hooks/useChat";
 import { ChatMessage } from "./ChatMessage";
@@ -7,6 +7,7 @@ import { GREETING_TEXT } from "../../data/chatbotFaq";
 
 export function ChatWidget() {
   const [open, setOpen] = useState(false);
+  const [hasOpened, setHasOpened] = useState(false);
   const [input, setInput] = useState("");
   const { messages, pending, sendMessage } = useChat();
   const scrollRef = useRef(null);
@@ -22,20 +23,47 @@ export function ChatWidget() {
     setInput("");
   };
 
+  const toggleOpen = () => {
+    setOpen((prev) => !prev);
+    setHasOpened(true);
+  };
+
   return (
     <>
       <button
         type="button"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={toggleOpen}
         aria-label={open ? "Close chat" : "Open chat"}
         className={clsx(
-          "fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full",
-          "border border-accent/30 bg-canvas text-accent shadow-[0_0_24px_-6px_var(--color-glow)]",
-          "[[data-theme=light]_&]:!border-transparent [[data-theme=light]_&]:!bg-[#0891b2] [[data-theme=light]_&]:!text-white",
-          "transition-transform duration-300 hover:scale-105 active:scale-95",
+          "group fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full",
+          "bg-surface shadow-[0_0_16px_-4px_var(--color-glow)]",
+          "transition-[transform,box-shadow] duration-300 ease-out motion-reduce:transition-none",
+          "hover:scale-105 hover:shadow-[0_0_28px_-4px_var(--color-glow)] active:scale-95 motion-reduce:hover:scale-100",
         )}
       >
-        {open ? <X size={22} /> : <MessageCircle size={22} />}
+        {/* pulsing ring — purely decorative, hidden from AT */}
+        <span
+          aria-hidden="true"
+          className="chat-trigger-pulse absolute inset-0 rounded-full border border-accent"
+        />
+        {/* stable ring, always visible; brightens on hover */}
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 rounded-full border border-accent/30 transition-colors duration-300 group-hover:border-accent/70"
+        />
+
+        {open ? (
+          <X className="relative h-6 w-6 text-accent" />
+        ) : (
+          <span className="relative font-display text-base font-black tracking-wide text-accent">PJ</span>
+        )}
+
+        {!hasOpened && !open && (
+          <span
+            aria-hidden="true"
+            className="absolute right-0 top-0 h-3 w-3 rounded-full bg-accent ring-2 ring-canvas"
+          />
+        )}
       </button>
 
       {open && (
