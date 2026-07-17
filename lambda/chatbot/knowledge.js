@@ -30,9 +30,6 @@ export const KNOWLEDGE_BASE = `
 - Built a full-stack AI-enabled B2B FinTech invoice management application (React.js, Java Servlets, MySQL) managing 50,000+ real-world invoice records, with full CRUD functionality, an advanced search engine, and analytical dashboards (charts and graphs).
 - Performed EDA and feature engineering on payment history and customer behavior indicators to uncover payment-delay patterns, then evaluated 5 regression models (XGBoost, Decision Tree, LightGBM, Gradient Boosting, Random Forest) to predict invoice clear/payment dates and categorize aging buckets for better cash-flow forecasting. Random Forest was the best performer, with roughly a 75% validation score.
 
-**Software Development Intern, Stige** (Remote, September 2021 — December 2021)
-- Engineered scalable full-stack web solutions using React.js and Node.js, optimizing RESTful APIs for faster data retrieval and seamless UI integration.
-
 ## Education
 **Bachelor of Technology, Computer Science** — Kalinga Institute of Industrial Technology (KIIT), Bhubaneswar, India. July 2019 — May 2023. CGPA: 8.77/10.0. Relevant coursework: Data Structures & Algorithms, DBMS, Operating Systems, Machine Learning.
 

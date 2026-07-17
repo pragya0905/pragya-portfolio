@@ -184,17 +184,6 @@ export const EXPERIENCE = [
     techStack: ["React.js", "Java Servlets", "MySQL", "Python", "Scikit-learn"],
   },
   {
-    type: "work",
-    role: "Software Development Intern",
-    company: "Stige",
-    logoInitials: "S",
-    logoUrl: null,
-    location: "Remote",
-    dates: "September 2021 — December 2021",
-    summary:
-      "Developed and optimized RESTful APIs in Node.js, reducing data retrieval latency by 30%.",
-  },
-  {
     type: "education",
     role: "B.Tech, Computer Science & Engineering",
     company: "Kalinga Institute of Industrial Technology (KIIT)",
