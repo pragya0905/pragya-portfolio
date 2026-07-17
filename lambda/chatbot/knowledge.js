@@ -26,7 +26,7 @@ export const KNOWLEDGE_BASE = `
 - Developed and deployed an interactive data analytics dashboard using Django and Power BI on AWS, enabling real-time business monitoring, and improved operational visibility by 30%.
 - Performed data cleaning, visualization, and statistical analysis using Python (Pandas, NumPy, Matplotlib) to support data-driven decision-making and surface actionable business insights.
 
-**Web Development Intern, HighRadius** (Remote, February 2022 — April 2022)
+**Web Development Intern, HighRadius** (Remote, January 2022 — April 2022)
 - Built a full-stack AI-enabled B2B FinTech invoice management application (React.js, Java Servlets, MySQL) managing 50,000+ real-world invoice records, with full CRUD functionality, an advanced search engine, and analytical dashboards (charts and graphs).
 - Performed EDA and feature engineering on payment history and customer behavior indicators to uncover payment-delay patterns, then evaluated 5 regression models (XGBoost, Decision Tree, LightGBM, Gradient Boosting, Random Forest) to predict invoice clear/payment dates and categorize aging buckets for better cash-flow forecasting. Random Forest was the best performer, with roughly a 75% validation score.
 
