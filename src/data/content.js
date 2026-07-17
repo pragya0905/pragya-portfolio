@@ -157,7 +157,7 @@ export const EXPERIENCE = [
     logoInitials: "DA",
     logoUrl: null,
     location: "Bhubaneswar, India",
-    dates: "January 2022 — June 2022",
+    dates: "June 2022 — August 2022",
     achievements: [
       {
         description:
