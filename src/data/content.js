@@ -169,8 +169,19 @@ export const EXPERIENCE = [
     logoUrl: null,
     location: "Remote",
     dates: "January 2022 — April 2022",
-    summary:
-      "Built a full-stack AI invoice management system in React.js and Java Servlets, processing 50,000+ invoices at 98% data accuracy.",
+    achievements: [
+      {
+        description:
+          "Built a full-stack AI-enabled B2B FinTech invoice management application (React.js, Java Servlets, MySQL) with full CRUD functionality, an advanced search engine, and analytical dashboards (charts, graphs).",
+        metric: { value: "50,000+", label: "invoice records managed" },
+      },
+      {
+        description:
+          "Performed EDA and feature engineering on payment history and customer behavior indicators, then evaluated 5 regression models (XGBoost, Decision Tree, LightGBM, Gradient Boosting, Random Forest) to predict invoice clear/payment dates and aging buckets for cash-flow forecasting — Random Forest was the best performer.",
+        metric: { value: "75%", label: "Random Forest validation score" },
+      },
+    ],
+    techStack: ["React.js", "Java Servlets", "MySQL", "Python", "Scikit-learn"],
   },
   {
     type: "work",
