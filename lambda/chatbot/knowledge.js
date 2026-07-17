@@ -22,9 +22,9 @@ export const KNOWLEDGE_BASE = `
 - Improved service reliability and delivery speed by driving design reviews, production readiness checks, and cross-team validations — resulted in 25% higher reliability and 20% faster release cycles.
 - Resolved critical production failures and edge-case service crashes, reducing fatal error rates to roughly 5% and improving overall system stability.
 
-**Data Analyst Intern, DivineAI** (Bhubaneswar, India, May 2022 — December 2022)
-- Developed and deployed a data analytics dashboard using Django and Power BI on AWS, enabling real-time business monitoring.
-- Enabled data-driven decision-making through data cleaning, visualization, and statistical analysis using Python (Pandas, NumPy, Matplotlib) to produce actionable business insights.
+**Data Analyst Intern, DivineAI** (Bhubaneswar, India, January 2022 — June 2022)
+- Developed and deployed an interactive data analytics dashboard using Django and Power BI on AWS, enabling real-time business monitoring, and improved operational visibility by 30%.
+- Performed data cleaning, visualization, and statistical analysis using Python (Pandas, NumPy, Matplotlib) to support data-driven decision-making and surface actionable business insights.
 
 **Web Development Intern, HighRadius** (Remote, February 2022 — April 2022)
 - Built a full-stack AI-enabled B2B FinTech invoice management application (React.js, Java Servlets, MySQL) managing 50,000+ real-world invoice records, with full CRUD functionality, an advanced search engine, and analytical dashboards (charts and graphs).

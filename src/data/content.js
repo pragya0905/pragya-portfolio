@@ -157,9 +157,15 @@ export const EXPERIENCE = [
     logoInitials: "DA",
     logoUrl: null,
     location: "Bhubaneswar, India",
-    dates: "May 2022 — April 2023",
-    summary:
-      "Built an interactive BI dashboard on AWS with a Python/Django backend, improving operational visibility by 30%.",
+    dates: "January 2022 — June 2022",
+    achievements: [
+      {
+        description:
+          "Developed and deployed an interactive data analytics dashboard using Django and Power BI on AWS, enabling real-time business monitoring. Performed data cleaning, visualization, and statistical analysis using Python (Pandas, NumPy, Matplotlib) to support data-driven decision-making and surface actionable business insights.",
+        metric: { value: "30%", label: "improvement in operational visibility" },
+      },
+    ],
+    techStack: ["Python", "Django", "Power BI", "AWS", "Pandas", "NumPy", "Matplotlib"],
   },
   {
     type: "work",
