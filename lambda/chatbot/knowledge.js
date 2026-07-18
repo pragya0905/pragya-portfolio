@@ -1,8 +1,8 @@
 // Comprehensive factual knowledge base for the chatbot's system prompt —
 // everything real and current about Pragya, loaded into every conversation
 // so most questions can be answered without a tool call. Sourced directly
-// from public/resume/Pragya_Kumari_Resume.pdf and src/data/content.js (the
-// site's own single source of truth) — nothing here is invented.
+// from her resume and src/data/content.js (the site's own single source of
+// truth) — nothing here is invented.
 //
 // Keep this file and the two source-of-truth files in sync manually: this
 // Lambda is a standalone zip deploy with no shared build step with the
@@ -10,48 +10,52 @@
 export const KNOWLEDGE_BASE = `
 ## Work history (full detail)
 
-**Founding Engineer, Aurique Life** (June 2025 — Present, Remote)
-- Architecting a cloud-hosted D2C e-commerce platform end to end: React frontend, Python/Flask backend, RESTful API design, authentication flows, and secure payment integration on AWS.
-- Owns the full technical execution alone — frontend architecture, API design, cloud infrastructure, and UI/UX design (Figma, Adobe Illustrator) — not just one slice of the system.
-- Cut transaction processing time by 30% and built 30+ responsive web components, improving mobile engagement by 20%.
-- This is a very early-stage startup (the resume lists it as "E-commerce Wellness Startup (Stealth Mode)" from when it hadn't been publicly named yet) — it's now publicly known as Aurique Life.
+**Founder, Aurique Life** (June 2025 — Present, Remote)
+- Founded a digital-first wellness brand — single-handedly architected and launched a scalable e-commerce platform, achieving $5K ARR and 25% month-over-month growth.
+- Built the complete backend in Python (Flask) and AWS (DynamoDB, SQS, SNS, CloudWatch) to handle order state management, secure OTP authentication, and real-time metric tracking.
+- Engineered a high-performance, responsive frontend in React and TypeScript, using GSAP and Framer Motion for an immersive, scroll-driven storytelling UI — boosted brand engagement by 30%.
+- This is her own company, not just an engineering role — she owns the whole thing: product, engineering, and business.
 
 **Software Development Engineer, Amazon** (January 2024 — May 2025, Hyderabad, India)
-- Led backend implementation of FCSKU-level provenance-aware inventory removals across 100+ fulfillment centers, reducing inventory fraud by 5.5M removals annually and cutting return mismatches by 95%.
-- Optimized high-TPS backend APIs by redesigning database queries and introducing request-level caching — reduced database load by 40-60% and improved API latency by 30%.
-- Improved service reliability and delivery speed by driving design reviews, production readiness checks, and cross-team validations — resulted in 25% higher reliability and 20% faster release cycles.
-- Resolved critical production failures and edge-case service crashes, reducing fatal error rates to roughly 5% and improving overall system stability.
+- Architected a provenance-aware inventory removal system eliminating counterfeit-swap fraud on FBA orders across 100+ fulfillment centers (Java, Spring Boot, AWS), cutting return mismatches by 95% and reducing annual fraud by $5.5M.
+- Re-architected a legacy EC2 polling service into an event-driven, serverless pipeline (Java, AWS CDK/TypeScript) — migrated deprecated APIs and built robust failure-path routing, eliminating idle compute costs.
+- Designed and deployed a real-time observability pipeline for Live Site services: a Python worker on AWS ECS Fargate polling and filtering error logs into DynamoDB as a single source of truth, visualized through a React/TypeScript dashboard for faster root-cause triage. This dropped the fatal error rate from 90% to roughly 5%.
 
-**Data Analyst Intern, DivineAI** (Bhubaneswar, India, June 2022 — August 2022)
-- Developed and deployed an interactive data analytics dashboard using Django and Power BI on AWS, enabling real-time business monitoring, and improved operational visibility by 30%.
-- Performed data cleaning, visualization, and statistical analysis using Python (Pandas, NumPy, Matplotlib) to support data-driven decision-making and surface actionable business insights.
+**Data Analyst Intern, DivineAI** (Bhubaneswar, India, June 2022 — September 2022)
+- Developed and deployed a real-time data analytics dashboard on AWS (Django, Power BI) and performed advanced statistical analysis (Python, Pandas, NumPy, Matplotlib), surfacing insights that improved operational visibility by 30%.
 
-**Web Development Intern, HighRadius** (Remote, January 2022 — April 2022)
+**Software Engineering Intern, HighRadius** (Remote, January 2022 — April 2022)
 - Built a full-stack AI-enabled B2B FinTech invoice management application (React.js, Java Servlets, MySQL) managing 50,000+ real-world invoice records, with full CRUD functionality, an advanced search engine, and analytical dashboards (charts and graphs).
-- Performed EDA and feature engineering on payment history and customer behavior indicators to uncover payment-delay patterns, then evaluated 5 regression models (XGBoost, Decision Tree, LightGBM, Gradient Boosting, Random Forest) to predict invoice clear/payment dates and categorize aging buckets for better cash-flow forecasting. Random Forest was the best performer, with roughly a 75% validation score.
+- Engineered a predictive cash-flow forecasting system: evaluated 5 ML regression models (XGBoost, Decision Tree, LightGBM, Gradient Boosting, Random Forest) to predict invoice clearing dates and aging buckets — Random Forest was the best performer, with roughly a 75% validation score.
 
 ## Education
-**Bachelor of Technology, Computer Science** — Kalinga Institute of Industrial Technology (KIIT), Bhubaneswar, India. July 2019 — May 2023. CGPA: 8.77/10.0. Relevant coursework: Data Structures & Algorithms, DBMS, Operating Systems, Machine Learning.
+**Bachelor of Technology, Computer Science** — Kalinga Institute of Industrial Technology (KIIT-DU), Bhubaneswar, India. July 2019 — May 2023. CGPA: 8.77/10.0. Relevant coursework: Data Structures & Algorithms, DBMS, Operating Systems, Machine Learning.
 
 ## Projects (full detail)
 
-**Aurique Life platform** — see the Founding Engineer role above; this is her current, primary project. Full-stack ownership of a D2C e-commerce platform from scratch: React frontend, Flask backend, AWS infra, RESTful APIs, auth, payments, and the visual/UX design work.
+**Aurique Life platform** — see the Founder role above; this is her current, primary project — her own company, built and run solo.
+
+**JobPilot** (Python, FastAPI, SQLite, Ollama, Pydantic, WeasyPrint) — a local-first job-search pipeline running entirely on-device via Ollama (a local LLM runner), sourcing, scoring, and tailoring resumes across 6+ job sources at zero cloud cost, with structured LLM output validation and fabrication guardrails to keep the AI from inventing resume content.
+
+**LifeOS** (React, AWS SAM, Lambda, API Gateway, DynamoDB, Claude API) — a personal life-tracking progressive web app on a serverless AWS backend, covering health, sleep, and expense tracking, integrated with the Claude API for AI-assisted insights.
+
+**Portfolio Assistant Chatbot (PJ)** — that's this very chatbot. A three-layer routing system: an instant client-side FAQ layer for predictable questions, Claude Haiku for reasoning on anything else, and a tool-execution layer split between server-side lookups (like this knowledge base) and client-side browser actions (scrolling the page, downloading the resume). Built to demonstrate real agent/LLM integration rather than a simple wrapped chat API.
 
 **Ransomware Detection System** (October 2024, Python / Machine Learning) — a machine-learning pipeline classifying malicious vs. benign behavior from system activity features, built with Python and scikit-learn. Feature engineering and statistical analysis improved model separability, achieving 90% detection accuracy and reducing false positives by 20%. Behavioral classification (not signature-matching) means it can catch novel ransomware variants that traditional antivirus tools miss.
 
 **This portfolio website** — a static React + Vite + Tailwind CSS site, deployed on S3 behind CloudFront, with a serverless contact form (Web3Forms, with a honeypot spam filter) and a CloudWatch dashboard combining CloudFront's built-in infra metrics with a custom Lambda-published metric for contact-form success/failure. It's a real, deployed piece of her engineering work, not just a container for her resume.
 
-**This chatbot** — the newest addition to the site. A small agent, not a wrapped LLM call: a free instant pattern-matching layer catches predictable questions before any API call happens; anything else falls through to Claude, which has this knowledge base loaded and a set of tools — some resolved entirely on the backend, others (like scrolling the page or downloading the resume) handed back to the browser to execute.
-
 ## Skills (full list, by category)
-**Backend & Cloud:** Java, Python, C++, Node.js, AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CloudWatch), System Design, RESTful API Design, SQL (MySQL), PostgreSQL, Flask, Django, Spring Boot, Docker.
-**AI & LLM Integration:** Claude API / Anthropic API, Prompt Engineering, LLM Integration.
+**Backend & Cloud:** Java, Python, C++, Node.js, AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CDK, CloudWatch, SQS, SNS, ECS), System Design, RESTful API Design, SQL (MySQL), PostgreSQL, Flask, Django, Spring Boot, Docker.
+**AI & LLM Integration:** Claude API / Anthropic API, Prompt Engineering, LLM Integration, Ollama (local LLMs), Tool Use / Function Calling.
 **Frontend:** React, JavaScript, HTML/CSS, TypeScript, Material UI, Tailwind CSS.
 **Data & Machine Learning:** Pandas, NumPy, Scikit-Learn, Matplotlib.
-**Engineering Tools:** Git, Lucidchart.
+**Engineering Tools:** Git, CI/CD, Lucidchart.
 **Design Tools:** Figma, Adobe Illustrator, Affinity.
 
 ## Certifications
+- IBM RAG and Agentic AI — IBM (via Coursera)
+- Software Design and Architecture — University of Alberta (via Coursera)
 - Generative AI for Software Developers — IBM (via Coursera)
 - AWS Cloud Practitioner Essentials — Amazon Web Services (via Coursera)
 - AWS Cloud Technical Essentials — Amazon Web Services (via Coursera)
@@ -61,5 +65,5 @@ export const KNOWLEDGE_BASE = `
 - Python for Everybody — University of Michigan (via Coursera)
 
 ## Contact
-Email: kmpragya052000@gmail.com. LinkedIn: linkedin.com/in/pragya58. GitHub: github.com/pragya0905. Based in Hyderabad, India. Open to full-stack and cloud engineering opportunities.
+Email: kmpragya052000@gmail.com. LinkedIn: linkedin.com/in/pragya58. GitHub: github.com/pragya0905. Based in India. Open to full-stack and cloud engineering opportunities.
 `;

@@ -1,4 +1,4 @@
-import { Brain, ChartSpline, MessageSquare, Network, PenTool, Webhook } from "lucide-react";
+import { Brain, ChartSpline, MessageSquare, Network, PenTool, Webhook, Workflow, Wrench } from "lucide-react";
 import { FaAws } from "react-icons/fa";
 import { DiJava, DiIllustrator } from "react-icons/di";
 import {
@@ -24,6 +24,7 @@ import {
   SiLucid,
   SiTailwindcss,
   SiClaude,
+  SiOllama,
 } from "react-icons/si";
 
 // Matplotlib has no maintained brand mark across icon sets, so it falls
@@ -52,7 +53,9 @@ export const SKILL_ICONS = {
   "Claude API / Anthropic API": { icon: SiClaude, color: "#d97757" },
   "Prompt Engineering": { icon: MessageSquare, color: "#22d3ee" },
   "LLM Integration": { icon: Brain, color: "#22d3ee" },
-  "AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CloudWatch)": {
+  "Ollama (Local LLMs)": { icon: SiOllama, color: "#e5e7eb" },
+  "Tool Use / Function Calling": { icon: Wrench, color: "#22d3ee" },
+  "AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CDK, CloudWatch, SQS, SNS, ECS)": {
     icon: FaAws,
     color: "#ff9900",
   },
@@ -63,6 +66,7 @@ export const SKILL_ICONS = {
   Matplotlib: { icon: ChartSpline, color: "#22d3ee" },
   "Scikit-Learn": { icon: SiScikitlearn, color: "#f7931e" },
   Git: { icon: SiGit, color: "#f05032" },
+  "CI/CD": { icon: Workflow, color: "#22d3ee" },
   Lucidchart: { icon: SiLucid, color: "#e4362d" },
   Figma: { icon: SiFigma, color: "#a259ff" },
   "Adobe Illustrator": { icon: DiIllustrator, color: "#ff9a00" },
@@ -73,5 +77,5 @@ export const SKILL_ICONS = {
 // on-card text is shortened, for entries too long to sit comfortably in the
 // grid alongside every other single-word/short tile.
 export const SKILL_SHORT_LABELS = {
-  "AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CloudWatch)": "AWS (8 services)",
+  "AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CDK, CloudWatch, SQS, SNS, ECS)": "AWS (12 services)",
 };

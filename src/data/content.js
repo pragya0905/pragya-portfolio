@@ -16,7 +16,7 @@ export const PROFILE = {
     "I built the end-to-end digital experience for Aurique Life.",
     2000,
   ],
-  photoUrl: "/profile-photo.png",
+  photoUrl: "/profile-photo.webp",
   initials: "PK",
 };
 
@@ -46,6 +46,18 @@ export const NAV_LINKS = [
 ];
 
 export const CERTIFICATIONS = [
+  {
+    name: "IBM RAG and Agentic AI",
+    issuer: "IBM · Coursera",
+    date: "",
+    url: "",
+  },
+  {
+    name: "Software Design and Architecture",
+    issuer: "University of Alberta · Coursera",
+    date: "",
+    url: "",
+  },
   {
     name: "Generative AI for Software Developers",
     issuer: "IBM · Coursera",
@@ -96,8 +108,8 @@ export const CERTIFICATIONS = [
 export const EXPERIENCE = [
   {
     type: "work",
-    role: "Founding Engineer",
-    badge: "Founding Engineer",
+    role: "Founder",
+    badge: "Founder",
     company: "Aurique Life",
     logoInitials: "AL",
     logoUrl: null,
@@ -106,16 +118,16 @@ export const EXPERIENCE = [
     achievements: [
       {
         description:
-          "Developed a cloud-native e-commerce platform using React.js and Python/Flask, backed by optimized RESTful APIs.",
-        metric: { value: "30%", label: "faster transaction processing" },
+          "Founded a digital-first wellness brand — single-handedly architected and launched a scalable e-commerce platform, building the complete backend in Python (Flask) and AWS (DynamoDB, SQS, SNS, CloudWatch) to handle order state management, secure OTP authentication, and real-time metric tracking.",
+        metric: { value: "$5K", label: "ARR, +25% MoM growth" },
       },
       {
         description:
-          "Built 30+ responsive web components using Figma and Adobe Illustrator, sharpening the mobile experience.",
-        metric: { value: "20%", label: "improvement in mobile engagement" },
+          "Engineered a high-performance, responsive frontend in React and TypeScript, leveraging GSAP and Framer Motion for an immersive, scroll-driven storytelling UI.",
+        metric: { value: "30%", label: "boost in brand engagement" },
       },
     ],
-    techStack: ["React.js", "Python", "Flask", "AWS", "Figma"],
+    techStack: ["React", "TypeScript", "GSAP", "Framer Motion", "Python", "Flask", "AWS"],
   },
   {
     type: "work",
@@ -129,26 +141,16 @@ export const EXPERIENCE = [
     achievements: [
       {
         description:
-          "Architected backend services and APIs in Java and AWS to streamline FCSKU-level inventory removals across 100+ fulfillment centers, cutting return mismatches by 95%.",
+          "Architected a provenance-aware inventory removal system eliminating counterfeit-swap fraud on FBA orders across 100+ fulfillment centers (Java, Spring Boot, AWS), cutting return mismatches by 95%.",
         metric: { value: "$5.5M", label: "annual fraud reduction" },
       },
       {
         description:
-          "Redesigned complex SQL queries and implemented distributed caching to reduce database load and improve API latency by 30%.",
-        metric: { value: "40-60%", label: "reduction in database load" },
-      },
-      {
-        description:
-          "Led rigorous design reviews and PRC (peer review committee) to harden service reliability and speed up release cycles by 20%.",
-        metric: { value: "25%", label: "boost in service reliability" },
-      },
-      {
-        description:
-          "Resolved critical production failures and edge-case service crashes, improving overall system stability.",
-        metric: { value: "~5%", label: "fatal error rate after fixes" },
+          "Re-architected a legacy EC2 polling service into an event-driven, serverless pipeline (Java, AWS CDK/TypeScript), migrating deprecated APIs and establishing robust failure-path routing. Then designed and deployed a real-time observability pipeline for Live Site services — a Python worker on AWS ECS Fargate polling and filtering error logs into DynamoDB, visualized through a React/TypeScript dashboard for faster root-cause triage.",
+        metric: { value: "90% → 5%", label: "fatal error rate, Live Site services" },
       },
     ],
-    techStack: ["Java", "AWS", "SQL", "Distributed Caching"],
+    techStack: ["Java", "Spring Boot", "AWS", "AWS CDK", "ECS Fargate", "DynamoDB", "React", "TypeScript"],
   },
   {
     type: "work",
@@ -157,7 +159,7 @@ export const EXPERIENCE = [
     logoInitials: "DA",
     logoUrl: null,
     location: "Bhubaneswar, India",
-    dates: "June 2022 — August 2022",
+    dates: "June 2022 — September 2022",
     achievements: [
       {
         description:
@@ -204,6 +206,36 @@ export const EXPERIENCE = [
 
 export const PROJECTS = [
   {
+    title: "JobPilot",
+    context: "AI Job-Search Tool",
+    description:
+      "Architected a local-first job-search pipeline running entirely on-device via Ollama — sourcing, scoring, and tailoring resumes across 6+ job sources at zero cloud cost, with structured LLM output validation and fabrication guardrails.",
+    metrics: [
+      { value: "6+", label: "job sources integrated" },
+      { value: "$0", label: "cloud cost — fully on-device" },
+    ],
+    tags: ["Python", "FastAPI", "SQLite", "Ollama", "Pydantic", "WeasyPrint"],
+    links: { github: null, demo: null },
+  },
+  {
+    title: "LifeOS",
+    context: "Personal Life-Tracking PWA",
+    description:
+      "Built a personal life-tracking progressive web app on a serverless AWS backend with a React frontend, covering health, sleep, and expense tracking, integrated with the Claude API for AI-assisted insights.",
+    metrics: [{ value: "3", label: "tracked domains: health, sleep, expenses" }],
+    tags: ["React", "AWS SAM", "Lambda", "API Gateway", "DynamoDB", "Claude API"],
+    links: { github: null, demo: null },
+  },
+  {
+    title: "Portfolio Assistant Chatbot (PJ)",
+    context: "AI Portfolio Agent",
+    description:
+      "Architected the live AI agent embedded on this site — a three-layer routing system with an instant client-side FAQ layer, Claude Haiku for reasoning, and a tool-execution layer split between server-side lookups and client-side browser actions — autonomously handling recruiter queries rather than just wrapping a chat API.",
+    metrics: [{ value: "3", label: "routing layers: FAQ, LLM, tool execution" }],
+    tags: ["React", "AWS Lambda", "API Gateway", "CloudFront", "Claude API"],
+    links: { github: null, demo: null },
+  },
+  {
     title: "Ransomware Detection System",
     context: "Machine Learning Project",
     description:
@@ -225,7 +257,7 @@ export const SKILLS = [
       "Python",
       "C++",
       "Node.js",
-      "AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CloudWatch)",
+      "AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CDK, CloudWatch, SQS, SNS, ECS)",
       "System Design",
       "RESTful API Design",
       "SQL (MySQL)",
@@ -238,7 +270,13 @@ export const SKILLS = [
   },
   {
     category: "AI & LLM Integration",
-    items: ["Claude API / Anthropic API", "Prompt Engineering", "LLM Integration"],
+    items: [
+      "Claude API / Anthropic API",
+      "Prompt Engineering",
+      "LLM Integration",
+      "Ollama (Local LLMs)",
+      "Tool Use / Function Calling",
+    ],
   },
   {
     category: "Frontend",
@@ -250,7 +288,7 @@ export const SKILLS = [
   },
   {
     category: "Engineering Tools",
-    items: ["Git", "Lucidchart"],
+    items: ["Git", "CI/CD", "Lucidchart"],
   },
   {
     category: "Design Tools",
