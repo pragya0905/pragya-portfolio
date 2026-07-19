@@ -1,4 +1,4 @@
-import { Brain, ChartSpline, MessageSquare, Network, PenTool, Webhook, Workflow, Wrench } from "lucide-react";
+import { Brain, ChartSpline, MessageSquare, Network, PenTool, Webhook, Workflow } from "lucide-react";
 import { FaAws } from "react-icons/fa";
 import { DiJava, DiIllustrator } from "react-icons/di";
 import {
@@ -54,7 +54,6 @@ export const SKILL_ICONS = {
   "Prompt Engineering": { icon: MessageSquare, color: "#22d3ee" },
   "LLM Integration": { icon: Brain, color: "#22d3ee" },
   "Ollama (Local LLMs)": { icon: SiOllama, color: "#e5e7eb" },
-  "Tool Use / Function Calling": { icon: Wrench, color: "#22d3ee" },
   "AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CDK, CloudWatch, SQS, SNS, ECS)": {
     icon: FaAws,
     color: "#ff9900",

@@ -108,7 +108,7 @@ export const CERTIFICATIONS = [
 export const EXPERIENCE = [
   {
     type: "work",
-    role: "Founder",
+    role: "Founder & Software Engineer",
     badge: "Founder",
     company: "Aurique Life",
     logoInitials: "AL",
@@ -118,7 +118,7 @@ export const EXPERIENCE = [
     achievements: [
       {
         description:
-          "Founded a digital-first wellness brand — single-handedly architected and launched a scalable e-commerce platform, building the complete backend in Python (Flask) and AWS (DynamoDB, SQS, SNS, CloudWatch) to handle order state management, secure OTP authentication, and real-time metric tracking.",
+          "Founded a digital wellness brand — single-handedly architected and launched a scalable e-commerce platform, building the complete backend in Python (Flask) and AWS (DynamoDB, SQS, SNS, CloudWatch) to handle order state management, secure OTP authentication, and real-time metric tracking.",
         metric: { value: "$5K", label: "ARR, +25% MoM growth" },
       },
       {
@@ -126,8 +126,13 @@ export const EXPERIENCE = [
           "Engineered a high-performance, responsive frontend in React and TypeScript, leveraging GSAP and Framer Motion for an immersive, scroll-driven storytelling UI.",
         metric: { value: "30%", label: "boost in brand engagement" },
       },
+      {
+        description:
+          "Led end-to-end digital branding and technical SEO, integrating automated marketing workflows and a cohesive, minimalist design system across the platform.",
+        metric: { value: "Unified", label: "branding, SEO & marketing automation" },
+      },
     ],
-    techStack: ["React", "TypeScript", "GSAP", "Framer Motion", "Python", "Flask", "AWS"],
+    techStack: ["React", "TypeScript", "Python", "Flask", "AWS", "DynamoDB", "SQS", "SNS", "CloudWatch", "GSAP", "Framer Motion"],
   },
   {
     type: "work",
@@ -149,8 +154,29 @@ export const EXPERIENCE = [
           "Re-architected a legacy EC2 polling service into an event-driven, serverless pipeline (Java, AWS CDK/TypeScript), migrating deprecated APIs and establishing robust failure-path routing. Then designed and deployed a real-time observability pipeline for Live Site services — a Python worker on AWS ECS Fargate polling and filtering error logs into DynamoDB, visualized through a React/TypeScript dashboard for faster root-cause triage.",
         metric: { value: "90% → 5%", label: "fatal error rate, Live Site services" },
       },
+      {
+        description:
+          "Led code and design reviews across projects, improving code quality and collaborating with cross-functional teams.",
+        metric: { value: "25%", label: "reduction in critical errors" },
+      },
     ],
-    techStack: ["Java", "Spring Boot", "AWS", "AWS CDK", "ECS Fargate", "DynamoDB", "React", "TypeScript"],
+    techStack: [
+      "Java",
+      "Python",
+      "TypeScript",
+      "React.js",
+      "Spring Boot",
+      "SQL",
+      "AWS Lambda",
+      "ECS Fargate",
+      "DynamoDB",
+      "SQS",
+      "SNS",
+      "S3",
+      "RDS",
+      "AWS CDK",
+      "CloudWatch",
+    ],
   },
   {
     type: "work",
@@ -221,8 +247,8 @@ export const PROJECTS = [
     title: "LifeOS",
     context: "Personal Life-Tracking PWA",
     description:
-      "Built a personal life-tracking progressive web app on a serverless AWS backend with a React frontend, covering health, sleep, and expense tracking, integrated with the Claude API for AI-assisted insights.",
-    metrics: [{ value: "3", label: "tracked domains: health, sleep, expenses" }],
+      "Built a personal life-tracking progressive web app on a serverless AWS backend with a React frontend, covering health, sleep, expense, task, and journal tracking — including AI-prioritized task management — integrated with the Claude API for AI-assisted insights.",
+    metrics: [{ value: "5", label: "tracked domains: health, sleep, expenses, tasks, journal" }],
     tags: ["React", "AWS SAM", "Lambda", "API Gateway", "DynamoDB", "Claude API"],
     links: { github: null, demo: null },
   },
@@ -239,7 +265,7 @@ export const PROJECTS = [
     title: "Ransomware Detection System",
     context: "Machine Learning Project",
     description:
-      "Built an ML pipeline classifying malicious vs. benign system activity, with feature engineering and statistical analysis to improve model separability.",
+      "Built an end-to-end ML pipeline classifying malicious vs. benign system activity from behavioral and system-level features, performing exploratory data analysis, feature engineering, and statistical analysis to improve class separability, then evaluated multiple classification models to select the best-performing one for deployment.",
     metrics: [
       { value: "90%", label: "detection accuracy" },
       { value: "20%", label: "fewer false positives" },
@@ -275,7 +301,6 @@ export const SKILLS = [
       "Prompt Engineering",
       "LLM Integration",
       "Ollama (Local LLMs)",
-      "Tool Use / Function Calling",
     ],
   },
   {
