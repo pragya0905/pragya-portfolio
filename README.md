@@ -2,7 +2,7 @@
 
 A single-page portfolio site — full-stack & cloud engineering experience, projects, skills, and certifications.
 
-**Live site:** [https://d1aa6im9pyy9sf.cloudfront.net](https://d1aa6im9pyy9sf.cloudfront.net)
+**Live site:** [https://www.pragyakumari.com](https://www.pragyakumari.com)
 
 ---
 
@@ -38,10 +38,10 @@ Verified against `package.json` and the codebase.
 
 **Infrastructure (AWS)**
 - **S3** — static file hosting (bucket: `pragya-kumari-portfolio-91f561f4`)
-- **CloudFront** — CDN in front of the S3 bucket (distribution: `E1WR599BU3HA0G`)
-- **API Gateway + Lambda** — two endpoints on one HTTP API (`sqhjzyzhw2`): `portfolio-contact-metric` (publishes a custom CloudWatch metric on contact-form submission) and `portfolio-chatbot` (proxies chat requests to the Anthropic API and runs the tool-use loop)
+- **CloudFront** — CDN in front of the S3 bucket (distribution: `E1WR599BU3HA0G`), serving the custom domain via an ACM certificate (`us-east-1`, DNS-validated) covering `pragyakumari.com` + `www.pragyakumari.com`; DNS/registrar is GoDaddy, with the bare apex domain forwarding (301) to `www`, since GoDaddy's DNS doesn't support an ALIAS/ANAME record at the zone apex
+- **API Gateway + Lambda** — two endpoints on one HTTP API (`sqhjzyzhw2`): `portfolio-contact-metric` (publishes a custom CloudWatch metric on contact-form submission) and `portfolio-chatbot` (proxies chat requests to the Anthropic API and runs the tool-use loop). CORS `AllowOrigins` is an explicit allowlist (both domain variants + the CloudFront URL + localhost), not a wildcard.
 - **DynamoDB** — `portfolio-chatbot-ratelimit`, a per-IP fixed-window rate limiter for the chatbot endpoint (on-demand billing, TTL-expired items)
-- **CloudWatch** — dashboard (`Portfolio-Infra-Health`) combining CloudFront's built-in metrics with the custom contact-form metric
+- **CloudWatch** — dashboard (`Portfolio-Infra-Health`) combining CloudFront's built-in metrics, the custom contact-form metric, and a second section covering the chatbot backend (Lambda invocations/errors/duration, API Gateway request count/4xx/5xx/latency)
 
 ---
 
@@ -91,14 +91,18 @@ Two separate tools, each used for what it's good at — deliberately not overlap
 Browser ──▶ gtag.js ──▶ Google Analytics 4
   (page views, section-view events, resume_download, hire_me_click)
 
-CloudFront ──▶ CloudWatch (automatic: Requests, error rates, cache hit rate, origin latency)
-Lambda ──▶ CloudWatch (custom: ContactFormSubmission, success/error)
+CloudFront ──▶ CloudWatch (automatic: Requests, error rates, cache hit rate, origin latency) [us-east-1]
+Lambda (contact-metric) ──▶ CloudWatch (custom: ContactFormSubmission, success/error) [ap-southeast-2]
+Lambda (chatbot) ──▶ CloudWatch (automatic: Invocations, Errors, Duration) [ap-southeast-2]
+API Gateway ──▶ CloudWatch (automatic: Count, 4xx, 5xx, Latency) [ap-southeast-2]
                 │
                 ▼
      CloudWatch Dashboard "Portfolio-Infra-Health"
 ```
 
-**Why this shape:** GA4 answers *visitor-behavior* questions (who's here, what are they doing) and is purpose-built for that; CloudWatch answers *infrastructure-health* questions (is the CDN erroring, is origin latency spiking) using metrics CloudFront already emits for free. The one custom CloudWatch metric (contact-form success/failure) is the single piece of "application health" data worth having next to the infra metrics, so it's folded into the same dashboard rather than living only in GA4.
+**Why this shape:** GA4 answers *visitor-behavior* questions (who's here, what are they doing) and is purpose-built for that; CloudWatch answers *infrastructure-health* questions (is the CDN erroring, is origin latency spiking, is the chatbot backend healthy) using metrics CloudFront/Lambda/API Gateway already emit for free. The one custom CloudWatch metric (contact-form success/failure) is the single piece of "application health" data worth having next to the infra metrics, so it's folded into the same dashboard rather than living only in GA4.
+
+**A region gotcha, worth knowing if you extend this dashboard:** CloudFront metrics always live in `us-east-1` regardless of which region the distribution actually serves from — but the Lambda/API Gateway/custom metrics live in whatever region those resources are deployed in (`ap-southeast-2` here). Each dashboard widget's `region` property has to match where its metric actually lives; copy-pasting one widget's region onto another (e.g. reusing `us-east-1` for a Lambda-region metric) produces a widget that silently shows no data — exactly this happened with the contact-form widget and went unnoticed until an audit caught it.
 
 ### 4. Chatbot flow
 
@@ -235,7 +239,8 @@ Implemented with Tailwind v4's CSS-first `@theme` and plain CSS custom propertie
 - Animated, theme-aware constellation particle background
 - Scroll-triggered reveal animations, reduced-motion aware throughout
 - Resume download button in the navbar (currently active); the code renders it disabled/greyed-out automatically if `resumeUrl` is ever unset, instead of linking to a missing file
-- Chat widget: a free client-side FAQ layer for predictable questions, backed by a Claude Haiku 4.5 agent (Lambda + API Gateway) for everything else, with real tool use — some tools resolved server-side, others (page scroll, resume download) handed back to the browser to execute. Per-IP rate limited and grounded in a full knowledge base sourced from the resume and site content.
+- Chat widget: a free client-side FAQ layer for predictable questions, backed by a Claude Haiku 4.5 agent (Lambda + API Gateway) for everything else, with real tool use — some tools resolved server-side, others (page scroll, resume download) handed back to the browser to execute. Per-IP rate limited and grounded in a full knowledge base sourced from the resume and site content. System prompt includes explicit guardrails against prompt injection, off-topic requests, and being asked to fabricate negative claims about Pragya — verified against live adversarial prompts, not just written and assumed to hold.
+- Custom domain (`pragyakumari.com` / `www.pragyakumari.com`) via an ACM-issued cert on CloudFront, with GoDaddy DNS/forwarding handling the apex-to-`www` redirect
 
 ---
 
