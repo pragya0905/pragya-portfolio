@@ -72,7 +72,7 @@ export function TimelineNode({
                 {achievements.map((achievement) => (
                   <li
                     key={achievement.description}
-                    className="flex flex-col gap-3 border-t border-line pt-6 first:border-t-0 first:pt-0 md:flex-row md:items-center md:justify-between md:gap-6"
+                    className="flex flex-col gap-3 border-t border-line pt-6 first:border-t-0 first:pt-0"
                   >
                     <p className="text-ink/90">{achievement.description}</p>
                     <MetricStat value={achievement.metric.value} label={achievement.metric.label} />
