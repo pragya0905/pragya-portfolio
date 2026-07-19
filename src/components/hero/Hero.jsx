@@ -85,6 +85,10 @@ export function Hero() {
                     <img
                       src={PROFILE.photoUrl}
                       alt={PROFILE.name}
+                      width={600}
+                      height={600}
+                      fetchPriority="high"
+                      decoding="async"
                       className="h-full w-full object-cover saturate-[85%] contrast-105"
                     />
                     <div

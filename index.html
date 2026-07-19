@@ -17,6 +17,12 @@
     <meta name="author" content="Pragya Kumari" />
     <link rel="canonical" href="https://d1aa6im9pyy9sf.cloudfront.net/" />
 
+    <!-- Hero photo is above-the-fold and render-blocking-adjacent visually,
+         but the browser can't discover the <img> tag until React renders —
+         preloading here lets the fetch start in parallel with the JS bundle
+         instead of only after it loads and executes. -->
+    <link rel="preload" as="image" href="/profile-photo.webp" fetchpriority="high" />
+
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
