@@ -48,8 +48,8 @@ export const KNOWLEDGE_BASE = `
 **This portfolio website** — a static React + Vite + Tailwind CSS site, deployed on S3 behind CloudFront, with a serverless contact form (Web3Forms, with a honeypot spam filter) and a CloudWatch dashboard combining CloudFront's built-in infra metrics with a custom Lambda-published metric for contact-form success/failure. It's a real, deployed piece of her engineering work, not just a container for her resume.
 
 ## Skills (full list, by category)
-**Backend & Cloud:** Java, Python, C++, Node.js, AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CDK, CloudWatch, SQS, SNS, ECS), System Design, RESTful API Design, SQL (MySQL), PostgreSQL, Flask, Django, Spring Boot, Docker.
-**AI & LLM Integration:** Claude API / Anthropic API, Prompt Engineering, LLM Integration, Ollama (local LLMs).
+**Backend & Cloud:** Java, Python, C++, Node.js, AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CDK, CloudWatch, SQS, SNS, ECS), System Design, RESTful API Design, SQL (MySQL), PostgreSQL, Flask, Django, FastAPI, Spring Boot, Docker.
+**AI & LLM Integration:** Claude API / Anthropic API, Prompt Engineering, LLM Integration, Ollama (local LLMs), RAG (Retrieval-Augmented Generation), Pydantic (structured LLM output validation).
 **Frontend:** React, JavaScript, HTML/CSS, TypeScript, Material UI, Tailwind CSS.
 **Data & Machine Learning:** Pandas, NumPy, Scikit-Learn, Matplotlib.
 **Engineering Tools:** Git, CI/CD, Lucidchart.
