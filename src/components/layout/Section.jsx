@@ -14,7 +14,7 @@ export function Section({ id, eyebrow, heading, highlight, children, className }
     <section
       id={id}
       aria-labelledby={`${id}-heading`}
-      className={clsx("scroll-mt-24 py-24", className)}
+      className={clsx("scroll-mt-24 py-16", className)}
     >
       <div
         ref={ref}

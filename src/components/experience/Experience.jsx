@@ -42,7 +42,7 @@ export function Experience() {
   return (
     <Section
       id="experience"
-      eyebrow="Experience"
+      eyebrow="Experience & Education"
       heading="Engineering at Scale"
       highlight="Real Impact!"
     >

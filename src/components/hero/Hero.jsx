@@ -22,7 +22,7 @@ export function Hero() {
 
   const reveal = (delayClass) =>
     clsx(
-      "transition-all duration-700 ease-out motion-reduce:transition-none",
+      "transition-all duration-300 ease-out motion-reduce:transition-none",
       mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
       delayClass,
     );
@@ -35,14 +35,14 @@ export function Hero() {
     >
       <div className="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-16 px-6 py-24 lg:grid-cols-2">
         <div className="flex flex-col gap-8">
-          <div className={reveal("delay-[0ms]")}>
+          <div>
             <p className="mb-4 font-mono text-sm text-accent">{PROFILE.title}</p>
             <h1 className="text-5xl font-bold tracking-tight text-ink md:text-7xl">
               {PROFILE.name}
             </h1>
           </div>
 
-          <div className={clsx("max-w-xl", reveal("delay-[100ms]"))}>
+          <div className={clsx("max-w-xl", reveal("delay-[50ms]"))}>
             <span className="sr-only">{PROFILE.tagline}</span>
             <TypeAnimation
               aria-hidden="true"
@@ -60,7 +60,7 @@ export function Hero() {
             </p>
           </div>
 
-          <div className={clsx("flex flex-wrap gap-4", reveal("delay-[200ms]"))}>
+          <div className={clsx("flex flex-wrap gap-4", reveal("delay-[100ms]"))}>
             <Button as="a" href="#projects" variant="primary">
               View Work
             </Button>
@@ -69,12 +69,12 @@ export function Hero() {
             </Button>
           </div>
 
-          <div className={reveal("delay-[300ms]")}>
+          <div className={reveal("delay-[150ms]")}>
             <FloatingSocialIcons />
           </div>
         </div>
 
-        <div className={clsx("order-first lg:order-last", reveal("delay-[400ms]"))}>
+        <div className={clsx("order-first lg:order-last", reveal("delay-[200ms]"))}>
           <div className="relative mx-auto w-full max-w-sm">
             <div aria-hidden="true" className="absolute inset-0 rounded-3xl bg-accent/20 blur-3xl" />
 

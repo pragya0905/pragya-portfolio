@@ -19,7 +19,7 @@ export function Footer() {
       id="contact"
       ref={ref}
       role="contentinfo"
-      className="scroll-mt-24 border-t border-line py-24"
+      className="scroll-mt-24 border-t border-line py-16"
     >
       <div className="mx-auto max-w-5xl px-6 text-center">
         <h2 className="text-3xl font-bold tracking-tight text-ink md:text-4xl">
