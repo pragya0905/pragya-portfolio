@@ -10,16 +10,18 @@
 export const KNOWLEDGE_BASE = `
 ## Work history (full detail)
 
-**Founder, Aurique Life** (June 2025 — Present, Remote)
-- Founded a digital-first wellness brand — single-handedly architected and launched a scalable e-commerce platform, achieving $5K ARR and 25% month-over-month growth.
+**Founder & Software Engineer, Aurique Life** (June 2025 — Present, Remote)
+- Founded a digital wellness brand — single-handedly architected and launched a scalable e-commerce platform, achieving $5K ARR and 25% month-over-month growth.
 - Built the complete backend in Python (Flask) and AWS (DynamoDB, SQS, SNS, CloudWatch) to handle order state management, secure OTP authentication, and real-time metric tracking.
 - Engineered a high-performance, responsive frontend in React and TypeScript, using GSAP and Framer Motion for an immersive, scroll-driven storytelling UI — boosted brand engagement by 30%.
+- Led end-to-end digital branding and technical SEO, integrating automated marketing workflows and a cohesive, minimalist design system across the platform.
 - This is her own company, not just an engineering role — she owns the whole thing: product, engineering, and business.
 
 **Software Development Engineer, Amazon** (January 2024 — May 2025, Hyderabad, India)
 - Architected a provenance-aware inventory removal system eliminating counterfeit-swap fraud on FBA orders across 100+ fulfillment centers (Java, Spring Boot, AWS), cutting return mismatches by 95% and reducing annual fraud by $5.5M.
 - Re-architected a legacy EC2 polling service into an event-driven, serverless pipeline (Java, AWS CDK/TypeScript) — migrated deprecated APIs and built robust failure-path routing, eliminating idle compute costs.
 - Designed and deployed a real-time observability pipeline for Live Site services: a Python worker on AWS ECS Fargate polling and filtering error logs into DynamoDB as a single source of truth, visualized through a React/TypeScript dashboard for faster root-cause triage. This dropped the fatal error rate from 90% to roughly 5%.
+- Led code and design reviews across projects, improving code quality and collaborating with cross-functional teams — cut critical errors by 25%.
 
 **Data Analyst Intern, DivineAI** (Bhubaneswar, India, June 2022 — September 2022)
 - Developed and deployed a real-time data analytics dashboard on AWS (Django, Power BI) and performed advanced statistical analysis (Python, Pandas, NumPy, Matplotlib), surfacing insights that improved operational visibility by 30%.
@@ -37,17 +39,17 @@ export const KNOWLEDGE_BASE = `
 
 **JobPilot** (Python, FastAPI, SQLite, Ollama, Pydantic, WeasyPrint) — a local-first job-search pipeline running entirely on-device via Ollama (a local LLM runner), sourcing, scoring, and tailoring resumes across 6+ job sources at zero cloud cost, with structured LLM output validation and fabrication guardrails to keep the AI from inventing resume content.
 
-**LifeOS** (React, AWS SAM, Lambda, API Gateway, DynamoDB, Claude API) — a personal life-tracking progressive web app on a serverless AWS backend, covering health, sleep, and expense tracking, integrated with the Claude API for AI-assisted insights.
+**LifeOS** (React, AWS SAM, Lambda, API Gateway, DynamoDB, Claude API) — a personal life-tracking progressive web app on a serverless AWS backend, covering health, sleep, expense, task, and journal tracking — including AI-prioritized task management — integrated with the Claude API for AI-assisted insights.
 
 **Portfolio Assistant Chatbot (PJ)** — that's this very chatbot. A three-layer routing system: an instant client-side FAQ layer for predictable questions, Claude Haiku for reasoning on anything else, and a tool-execution layer split between server-side lookups (like this knowledge base) and client-side browser actions (scrolling the page, downloading the resume). Built to demonstrate real agent/LLM integration rather than a simple wrapped chat API.
 
-**Ransomware Detection System** (October 2024, Python / Machine Learning) — a machine-learning pipeline classifying malicious vs. benign behavior from system activity features, built with Python and scikit-learn. Feature engineering and statistical analysis improved model separability, achieving 90% detection accuracy and reducing false positives by 20%. Behavioral classification (not signature-matching) means it can catch novel ransomware variants that traditional antivirus tools miss.
+**Ransomware Detection System** (October 2024, Python / Machine Learning) — an end-to-end ML pipeline classifying malicious vs. benign system activity from behavioral and system-level features. Performed exploratory data analysis, feature engineering, and statistical analysis to improve class separability, then evaluated multiple classification models to select the best-performing one for deployment — achieving 90% detection accuracy and reducing false positives by 20%. Behavioral classification (not signature-matching) means it can catch novel ransomware variants that traditional antivirus tools miss.
 
 **This portfolio website** — a static React + Vite + Tailwind CSS site, deployed on S3 behind CloudFront, with a serverless contact form (Web3Forms, with a honeypot spam filter) and a CloudWatch dashboard combining CloudFront's built-in infra metrics with a custom Lambda-published metric for contact-form success/failure. It's a real, deployed piece of her engineering work, not just a container for her resume.
 
 ## Skills (full list, by category)
 **Backend & Cloud:** Java, Python, C++, Node.js, AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CDK, CloudWatch, SQS, SNS, ECS), System Design, RESTful API Design, SQL (MySQL), PostgreSQL, Flask, Django, Spring Boot, Docker.
-**AI & LLM Integration:** Claude API / Anthropic API, Prompt Engineering, LLM Integration, Ollama (local LLMs), Tool Use / Function Calling.
+**AI & LLM Integration:** Claude API / Anthropic API, Prompt Engineering, LLM Integration, Ollama (local LLMs).
 **Frontend:** React, JavaScript, HTML/CSS, TypeScript, Material UI, Tailwind CSS.
 **Data & Machine Learning:** Pandas, NumPy, Scikit-Learn, Matplotlib.
 **Engineering Tools:** Git, CI/CD, Lucidchart.
