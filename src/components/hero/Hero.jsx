@@ -87,11 +87,11 @@ export function Hero() {
                       <img
                         src={PROFILE.photoUrl.replace(/\.webp$/, ".png")}
                         alt={PROFILE.name}
-                        width={600}
-                        height={600}
+                        width={500}
+                        height={500}
                         fetchPriority="high"
                         decoding="async"
-                        className="h-full w-full object-cover saturate-[85%] contrast-105"
+                        className="h-full w-full object-contain saturate-[85%] contrast-105"
                       />
                     </picture>
                     <div

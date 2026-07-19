@@ -34,7 +34,7 @@
   --color-accent-dim: #0891b224;
   --color-glow: #0891b240;
   --color-shadow: rgba(15, 23, 42, 0.08);
-  --color-photo-bg: var(--color-ink);
+  --color-photo-bg: var(--color-canvas);
 }
 
 @layer base {
