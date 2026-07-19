@@ -21,7 +21,7 @@
          but the browser can't discover the <img> tag until React renders —
          preloading here lets the fetch start in parallel with the JS bundle
          instead of only after it loads and executes. -->
-    <link rel="preload" as="image" href="/profile-photo.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/profile-photo.webp" type="image/webp" fetchpriority="high" />
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -66,7 +66,7 @@
           "name": "Aurique Life"
         },
         "url": "https://d1aa6im9pyy9sf.cloudfront.net/",
-        "image": "https://d1aa6im9pyy9sf.cloudfront.net/profile-photo.webp",
+        "image": "https://d1aa6im9pyy9sf.cloudfront.net/profile-photo.png",
         "email": "mailto:kmpragya052000@gmail.com",
         "sameAs": ["https://www.linkedin.com/in/pragya58/"]
       }

@@ -82,15 +82,18 @@ export function Hero() {
               <div className="relative aspect-square overflow-hidden rounded-2xl bg-[var(--color-photo-bg)]">
                 {PROFILE.photoUrl ? (
                   <>
-                    <img
-                      src={PROFILE.photoUrl}
-                      alt={PROFILE.name}
-                      width={600}
-                      height={600}
-                      fetchPriority="high"
-                      decoding="async"
-                      className="h-full w-full object-cover saturate-[85%] contrast-105"
-                    />
+                    <picture>
+                      <source srcSet={PROFILE.photoUrl} type="image/webp" />
+                      <img
+                        src={PROFILE.photoUrl.replace(/\.webp$/, ".png")}
+                        alt={PROFILE.name}
+                        width={600}
+                        height={600}
+                        fetchPriority="high"
+                        decoding="async"
+                        className="h-full w-full object-cover saturate-[85%] contrast-105"
+                      />
+                    </picture>
                     <div
                       aria-hidden="true"
                       className="pointer-events-none absolute inset-0 bg-accent/10 mix-blend-soft-light"
