@@ -92,7 +92,7 @@ export function useChat() {
       const trimmed = text.trim();
       if (!trimmed || pending) return;
 
-      trackEvent("chatbot_message_sent");
+      trackEvent("pj_message_sent");
       appendDisplay("user", trimmed);
       historyRef.current = [...historyRef.current, { role: "user", content: [{ type: "text", text: trimmed }] }];
 

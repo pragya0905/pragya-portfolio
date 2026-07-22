@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { ArrowUpRight } from "lucide-react";
 import { Tag } from "../ui/Tag";
 import { GithubIcon } from "../ui/BrandIcons";
+import { trackEvent } from "../../lib/analytics";
 
 export function ProjectCard({ title, context, description, metrics, tags, links }) {
   const hasLinks = links.github || links.demo;
@@ -48,6 +49,7 @@ export function ProjectCard({ title, context, description, metrics, tags, links 
               href={links.github}
               target="_blank"
               rel="noreferrer"
+              onClick={() => trackEvent("project_link_clicked", { project: title, type: "github" })}
               className="flex items-center gap-1 text-sm text-muted hover:text-accent"
             >
               <GithubIcon className="h-4 w-4" aria-hidden="true" /> Code
@@ -58,6 +60,7 @@ export function ProjectCard({ title, context, description, metrics, tags, links 
               href={links.demo}
               target="_blank"
               rel="noreferrer"
+              onClick={() => trackEvent("project_link_clicked", { project: title, type: "demo" })}
               className="flex items-center gap-1 text-sm text-muted hover:text-accent"
             >
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" /> Live

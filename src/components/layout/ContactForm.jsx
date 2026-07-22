@@ -1,6 +1,7 @@
 import { useState } from "react";
 import clsx from "clsx";
 import { CONTACT_METRIC_URL, SOCIAL_LINKS, WEB3FORMS_ACCESS_KEY } from "../../data/content";
+import { trackEvent } from "../../lib/analytics";
 import { Button } from "../ui/Button";
 
 const FIELD_CLASS =
@@ -69,9 +70,11 @@ export function ContactForm() {
       setForm({ name: "", email: "", message: "" });
       setEmailTouched(false);
       reportContactMetric("success");
+      trackEvent("contact_form_submitted", { status: "success" });
     } catch {
       setStatus("error");
       reportContactMetric("error");
+      trackEvent("contact_form_submitted", { status: "error" });
     }
   };
 

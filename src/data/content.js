@@ -11,7 +11,7 @@ export const PROFILE = {
     2000,
     "I architect Amazon-scale backend systems.",
     2000,
-    "I resolved 5.5M inventory discrepancies via optimized APIs.",
+    "I prevented $5.5M in annual fraud at Amazon",
     2000,
     "I built the end-to-end digital experience for Aurique Life.",
     2000,
@@ -151,7 +151,12 @@ export const EXPERIENCE = [
       },
       {
         description:
-          "Re-architected a legacy EC2 polling service into an event-driven, serverless pipeline (Java, AWS CDK/TypeScript), migrating deprecated APIs and establishing robust failure-path routing. Then designed and deployed a real-time observability pipeline for Live Site services — a Python worker on AWS ECS Fargate polling and filtering error logs into DynamoDB, visualized through a React/TypeScript dashboard for faster root-cause triage.",
+          "Re-architected a legacy EC2 polling service into an event-driven, serverless pipeline (Java, AWS CDK/TypeScript), migrating deprecated APIs and establishing robust failure-path routing.",
+        metric: { value: "Serverless", label: "event-driven EC2 migration" },
+      },
+      {
+        description:
+          "Designed and deployed a real-time observability pipeline for Live Site services — a Python worker on AWS ECS Fargate polling and filtering error logs into DynamoDB, visualized through a React/TypeScript dashboard for faster root-cause triage.",
         metric: { value: "90% → 5%", label: "fatal error rate, Live Site services" },
       },
       {

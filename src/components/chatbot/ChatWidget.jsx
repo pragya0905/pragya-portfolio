@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { useChat } from "../../hooks/useChat";
 import { ChatMessage } from "./ChatMessage";
 import { GREETING_TEXT } from "../../data/chatbotFaq";
+import { trackEvent } from "../../lib/analytics";
 
 export function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -24,7 +25,10 @@ export function ChatWidget() {
   };
 
   const toggleOpen = () => {
-    setOpen((prev) => !prev);
+    setOpen((prev) => {
+      if (!prev) trackEvent("pj_chat_opened");
+      return !prev;
+    });
     setHasOpened(true);
   };
 
