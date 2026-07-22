@@ -8,10 +8,6 @@ export const GREETING_TEXT = "Hey! I'm PJ 👋 — here to help you get to know 
 
 const ENTRIES = [
   {
-    test: (text) => /^\s*(hi|hello|hey|yo)\b/i.test(text) && text.trim().length < 24,
-    respond: () => ({ text: GREETING_TEXT }),
-  },
-  {
     test: (text) => /\b(resume|cv)\b/i.test(text),
     respond: () => ({
       text: "Here you go — downloading her resume now.",
