@@ -19,7 +19,7 @@ export const KNOWLEDGE_BASE = `
 
 **Software Development Engineer, Amazon** (January 2024 — May 2025, Hyderabad, India)
 - Architected a provenance-aware inventory removal system eliminating counterfeit-swap fraud on FBA orders across 100+ fulfillment centers (Java, Spring Boot, AWS), cutting return mismatches by 95% and reducing annual fraud by $5.5M.
-- Re-architected a legacy EC2 polling service into an event-driven, serverless pipeline (Java, AWS CDK/TypeScript) — migrated deprecated APIs and built robust failure-path routing, eliminating idle compute costs.
+- Re-architected a legacy EC2 polling service into an event-driven, serverless pipeline (Java, AWS CDK/TypeScript) — migrated deprecated APIs and built robust failure-path routing, eliminating idle compute costs and improving shipment processing latency.
 - Designed and deployed a real-time observability pipeline for Live Site services: a Python worker on AWS ECS Fargate polling and filtering error logs into DynamoDB as a single source of truth, visualized through a React/TypeScript dashboard for faster root-cause triage. This dropped the fatal error rate from 90% to roughly 5%.
 - Led code and design reviews across projects, improving code quality and collaborating with cross-functional teams — cut critical errors by 25%.
 
