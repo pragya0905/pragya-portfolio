@@ -1,4 +1,4 @@
-import { Brain, ChartSpline, MessageSquare, Network, PenTool, Webhook, Workflow } from "lucide-react";
+import { Brain, ChartSpline, MessageSquare, Network, PenTool, Search, Webhook, Workflow } from "lucide-react";
 import { FaAws } from "react-icons/fa";
 import { DiJava, DiIllustrator } from "react-icons/di";
 import {
@@ -25,12 +25,15 @@ import {
   SiTailwindcss,
   SiClaude,
   SiOllama,
+  SiFastapi,
+  SiPydantic,
 } from "react-icons/si";
 
 // Matplotlib has no maintained brand mark across icon sets, so it falls
 // back to a generic chart glyph. Affinity (Serif's design suite) has no
 // brand mark in any icon set either, so it falls back to a generic pen
-// tool glyph rather than a misleading logo.
+// tool glyph rather than a misleading logo. RAG is a technique, not a
+// product, so it uses a generic search glyph rather than a fabricated logo.
 // Colors are each tool's real brand color (lightened where the official
 // shade is too dark to read against a near-black background).
 export const SKILL_ICONS = {
@@ -45,6 +48,7 @@ export const SKILL_ICONS = {
   "HTML/CSS": { icon: SiHtml5, color: "#e34f26" },
   "Node.js": { icon: SiNodedotjs, color: "#339933" },
   Flask: { icon: SiFlask, color: "#e5e7eb" },
+  FastAPI: { icon: SiFastapi, color: "#009688" },
   Django: { icon: SiDjango, color: "#44b78b" },
   "Spring Boot": { icon: SiSpringboot, color: "#6db33f" },
   Docker: { icon: SiDocker, color: "#2496ed" },
@@ -54,6 +58,8 @@ export const SKILL_ICONS = {
   "Prompt Engineering": { icon: MessageSquare, color: "#22d3ee" },
   "LLM Integration": { icon: Brain, color: "#22d3ee" },
   "Ollama (Local LLMs)": { icon: SiOllama, color: "#e5e7eb" },
+  "RAG (Retrieval-Augmented Generation)": { icon: Search, color: "#22d3ee" },
+  Pydantic: { icon: SiPydantic, color: "#e92063" },
   "AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CDK, CloudWatch, SQS, SNS, ECS)": {
     icon: FaAws,
     color: "#ff9900",
@@ -77,4 +83,5 @@ export const SKILL_ICONS = {
 // grid alongside every other single-word/short tile.
 export const SKILL_SHORT_LABELS = {
   "AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CDK, CloudWatch, SQS, SNS, ECS)": "AWS (12 services)",
+  "RAG (Retrieval-Augmented Generation)": "RAG",
 };

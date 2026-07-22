@@ -289,6 +289,7 @@ export const SKILLS = [
       "SQL (MySQL)",
       "PostgreSQL",
       "Flask",
+      "FastAPI",
       "Django",
       "Spring Boot",
       "Docker",
@@ -301,6 +302,8 @@ export const SKILLS = [
       "Prompt Engineering",
       "LLM Integration",
       "Ollama (Local LLMs)",
+      "RAG (Retrieval-Augmented Generation)",
+      "Pydantic",
     ],
   },
   {
