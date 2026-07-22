@@ -80,7 +80,8 @@ export function useChat() {
         ];
         // loop again so Claude can finish responding after the action runs
       }
-    } catch {
+    } catch (err) {
+      trackEvent("chatbot_error", { message: err?.message || "unknown" });
       appendDisplay("assistant", "Something went wrong — please try again, or use the contact form below.");
     } finally {
       setPending(false);
