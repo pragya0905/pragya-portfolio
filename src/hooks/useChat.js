@@ -14,6 +14,7 @@ const CLIENT_ACTIONS = {
   },
   download_resume: () => {
     if (!SOCIAL_LINKS.resumeUrl) return;
+    trackEvent("resume_download");
     const link = document.createElement("a");
     link.href = SOCIAL_LINKS.resumeUrl;
     link.download = "";
