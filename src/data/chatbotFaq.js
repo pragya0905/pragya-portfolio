@@ -18,6 +18,22 @@ export const SUGGESTED_QUESTIONS = [
   "How can I get in touch?",
 ];
 
+// Category tag for each suggested question, used only for analytics
+// (chatbot_quick_reply's `category` param) — not shown to the visitor.
+export const QUESTION_CATEGORIES = {
+  "Tell me about her projects": "projects",
+  "What's her tech stack?": "tech_stack",
+  "How do I get her resume?": "resume",
+  "What's she working on now?": "current_work",
+  "How can I get in touch?": "hiring",
+};
+
+// Lightweight client-side signal that a visitor wants a human, not the bot —
+// tracked as an engagement/quality signal, not acted on specially otherwise
+// (the model already handles these messages normally).
+export const ESCALATION_PATTERN =
+  /\b(talk to (a )?(human|person|someone)|real person|speak (to|with) (pragya|someone)|contact (her|you) directly|human support|actual person)\b/i;
+
 const ENTRIES = [
   {
     test: (text) => /\b(resume|cv)\b/i.test(text),

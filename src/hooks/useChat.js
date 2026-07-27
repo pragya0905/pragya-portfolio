@@ -1,9 +1,20 @@
 import { useCallback, useRef, useState } from "react";
 import { CHATBOT_API_URL, SOCIAL_LINKS } from "../data/content";
-import { matchFaq } from "../data/chatbotFaq";
+import { matchFaq, QUESTION_CATEGORIES, ESCALATION_PATTERN } from "../data/chatbotFaq";
 import { trackEvent } from "../lib/analytics";
 
 const MAX_CLIENT_ACTION_ROUNDTRIPS = 4;
+
+// Best-effort client-side signal that Claude couldn't really answer —
+// mirrors the system prompt's own instruction to admit it doesn't know
+// rather than guessing. Verified against real replies rather than assumed:
+// Claude paraphrases the "suggest the contact form" part freely, so
+// requiring that exact phrase missed real fallbacks in testing — this
+// matches on the admission-of-gap phrasing instead, which showed up
+// consistently. Not exhaustive (a model reply is free text), just a
+// useful proxy for "how often are we coming up short," not a hard classifier.
+const FALLBACK_PATTERN =
+  /\b(i don't have (that|this|those) (information|details)|not something i have|not documented|i'm not (sure|certain)|i don't know)\b/i;
 
 // Client-side tools the backend can hand control back for — see
 // lambda/chatbot/tools.js's CLIENT_TOOL_NAMES for the server-side half of
@@ -66,7 +77,9 @@ export function useChat() {
         const data = await res.json();
 
         historyRef.current = [...historyRef.current, data.assistantMessage];
-        appendDisplay("assistant", textOf(data.assistantMessage.content));
+        const replyText = textOf(data.assistantMessage.content);
+        appendDisplay("assistant", replyText);
+        if (FALLBACK_PATTERN.test(replyText)) trackEvent("chatbot_fallback");
 
         if (data.status !== "needs_client_action") break;
 
@@ -89,11 +102,22 @@ export function useChat() {
   }, [appendDisplay, runClientAction]);
 
   const sendMessage = useCallback(
-    (text) => {
+    (text, source = "typed") => {
       const trimmed = text.trim();
       if (!trimmed || pending) return;
 
-      trackEvent("pj_message_sent");
+      if (source === "quick_reply") {
+        trackEvent("chatbot_quick_reply", {
+          button_text: trimmed,
+          category: QUESTION_CATEGORIES[trimmed] || "other",
+        });
+      } else {
+        trackEvent("pj_message_sent", { message_length: trimmed.length });
+      }
+      if (ESCALATION_PATTERN.test(trimmed)) {
+        trackEvent("chatbot_escalation", { total_messages_before_escalation: messages.length });
+      }
+
       appendDisplay("user", trimmed);
       historyRef.current = [...historyRef.current, { role: "user", content: [{ type: "text", text: trimmed }] }];
 
@@ -110,7 +134,7 @@ export function useChat() {
 
       continueConversation();
     },
-    [appendDisplay, continueConversation, pending, runClientAction],
+    [appendDisplay, continueConversation, messages.length, pending, runClientAction],
   );
 
   return { messages, pending, sendMessage };

@@ -13,6 +13,7 @@ export function ChatWidget() {
   const [input, setInput] = useState("");
   const { messages, pending, sendMessage } = useChat();
   const scrollRef = useRef(null);
+  const openedAtRef = useRef(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -36,8 +37,18 @@ export function ChatWidget() {
 
   const toggleOpen = () => {
     setOpen((prev) => {
-      if (!prev) trackEvent("pj_chat_opened");
-      return !prev;
+      const next = !prev;
+      if (next) {
+        trackEvent("pj_chat_opened");
+        openedAtRef.current = Date.now();
+      } else if (openedAtRef.current) {
+        trackEvent("chatbot_closed", {
+          total_messages: messages.length,
+          session_duration_ms: Date.now() - openedAtRef.current,
+        });
+        openedAtRef.current = null;
+      }
+      return next;
     });
     setHasOpened(true);
     setShowCallout(false);
@@ -115,7 +126,7 @@ export function ChatWidget() {
                   <button
                     key={question}
                     type="button"
-                    onClick={() => sendMessage(question)}
+                    onClick={() => sendMessage(question, "quick_reply")}
                     className="rounded-full border border-accent/30 bg-accent-dim px-3 py-1.5 text-xs text-accent transition-colors duration-200 hover:border-accent hover:bg-accent/15"
                   >
                     {question}
