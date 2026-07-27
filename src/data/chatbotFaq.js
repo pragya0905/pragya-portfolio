@@ -4,7 +4,17 @@
 // useChat's backend call.
 // Shared with ChatWidget.jsx's static pre-interaction greeting bubble, so
 // the two can't drift out of sync with each other again.
-export const GREETING_TEXT = "Hey! I'm PJ 👋 — here to help you get to know Pragya a bit better. What's your name?";
+export const GREETING_TEXT =
+  "Hi! 👋 I'm PJ, Pragya's AI assistant. I can tell you about:\n- Her projects & experience\n- Tech stack & skills\n- How to work together\n\nWhat would you like to know?";
+
+// Shown as clickable pills before the visitor sends their first message —
+// gives a concrete starting point instead of a blank "ask me anything."
+// Hidden as soon as the conversation actually starts.
+export const SUGGESTED_QUESTIONS = [
+  "Tell me about her projects",
+  "What's her tech stack?",
+  "How do I get her resume?",
+];
 
 const ENTRIES = [
   {

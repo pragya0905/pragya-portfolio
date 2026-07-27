@@ -3,7 +3,7 @@ import { Send, X } from "lucide-react";
 import clsx from "clsx";
 import { useChat } from "../../hooks/useChat";
 import { ChatMessage } from "./ChatMessage";
-import { GREETING_TEXT } from "../../data/chatbotFaq";
+import { GREETING_TEXT, SUGGESTED_QUESTIONS } from "../../data/chatbotFaq";
 import { trackEvent } from "../../lib/analytics";
 
 export function ChatWidget() {
@@ -71,7 +71,7 @@ export function ChatWidget() {
       </button>
 
       {open && (
-        <div className="fixed bottom-24 right-6 z-50 flex h-[28rem] w-[22rem] max-w-[calc(100vw-3rem)] flex-col overflow-hidden rounded-2xl border border-line bg-canvas shadow-2xl">
+        <div className="fixed bottom-24 right-6 z-50 flex h-[34rem] w-[24rem] max-w-[calc(100vw-3rem)] flex-col overflow-hidden rounded-2xl border border-line bg-canvas shadow-2xl">
           <div className="border-b border-line px-4 py-3">
             <p className="text-sm font-bold text-ink">Ask about Pragya</p>
             <p className="text-xs text-muted">Usually replies instantly</p>
@@ -79,6 +79,20 @@ export function ChatWidget() {
 
           <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
             <ChatMessage role="assistant" text={GREETING_TEXT} />
+            {messages.length === 0 && (
+              <div className="flex flex-wrap gap-2 pl-1">
+                {SUGGESTED_QUESTIONS.map((question) => (
+                  <button
+                    key={question}
+                    type="button"
+                    onClick={() => sendMessage(question)}
+                    className="rounded-full border border-accent/30 bg-accent-dim px-3 py-1.5 text-xs text-accent transition-colors duration-200 hover:border-accent hover:bg-accent/15"
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
+            )}
             {messages.map((message) => (
               <ChatMessage key={message.id} role={message.role} text={message.text} />
             ))}
