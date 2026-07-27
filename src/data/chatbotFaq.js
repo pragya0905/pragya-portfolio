@@ -14,6 +14,8 @@ export const SUGGESTED_QUESTIONS = [
   "Tell me about her projects",
   "What's her tech stack?",
   "How do I get her resume?",
+  "What's she working on now?",
+  "How can I get in touch?",
 ];
 
 const ENTRIES = [

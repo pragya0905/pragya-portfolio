@@ -48,18 +48,18 @@ export function ChatWidget() {
       {showCallout && !open && (
         <div
           role="status"
-          className="chat-callout-in fixed bottom-24 right-6 z-50 flex max-w-[calc(100vw-3rem)] items-center gap-2 rounded-xl border border-accent/30 bg-surface px-4 py-2.5 text-sm text-ink shadow-[0_8px_24px_-8px_var(--color-shadow)]"
+          className="chat-callout-in fixed bottom-24 right-6 z-50 flex max-w-[calc(100vw-3rem)] items-center gap-2.5 rounded-xl border border-accent/40 bg-surface px-5 py-3.5 text-ink shadow-[0_0_24px_-6px_var(--color-glow),0_12px_32px_-8px_var(--color-shadow)]"
         >
-          <button type="button" onClick={toggleOpen} className="text-left">
+          <button type="button" onClick={toggleOpen} className="text-left text-[0.95rem] font-semibold">
             💬 Ask me about Pragya!
           </button>
           <button
             type="button"
             onClick={() => setShowCallout(false)}
             aria-label="Dismiss"
-            className="text-faint hover:text-muted"
+            className="shrink-0 text-faint hover:text-muted"
           >
-            <X className="h-3.5 w-3.5" />
+            <X className="h-4 w-4" />
           </button>
         </div>
       )}
