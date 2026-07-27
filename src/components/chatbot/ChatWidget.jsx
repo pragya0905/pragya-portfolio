@@ -9,6 +9,7 @@ import { trackEvent } from "../../lib/analytics";
 export function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [hasOpened, setHasOpened] = useState(false);
+  const [showCallout, setShowCallout] = useState(false);
   const [input, setInput] = useState("");
   const { messages, pending, sendMessage } = useChat();
   const scrollRef = useRef(null);
@@ -16,6 +17,15 @@ export function ChatWidget() {
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, pending]);
+
+  // A one-time, dismissible nudge — not an auto-opened panel, which reads
+  // as pushy on a page a recruiter is skimming. Skipped entirely under
+  // reduced motion, matching the rest of the site's reveal conventions.
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = setTimeout(() => setShowCallout(true), 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,10 +40,30 @@ export function ChatWidget() {
       return !prev;
     });
     setHasOpened(true);
+    setShowCallout(false);
   };
 
   return (
     <>
+      {showCallout && !open && (
+        <div
+          role="status"
+          className="chat-callout-in fixed bottom-24 right-6 z-50 flex max-w-[calc(100vw-3rem)] items-center gap-2 rounded-xl border border-accent/30 bg-surface px-4 py-2.5 text-sm text-ink shadow-[0_8px_24px_-8px_var(--color-shadow)]"
+        >
+          <button type="button" onClick={toggleOpen} className="text-left">
+            💬 Ask me about Pragya!
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowCallout(false)}
+            aria-label="Dismiss"
+            className="text-faint hover:text-muted"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      )}
+
       <button
         type="button"
         onClick={toggleOpen}
