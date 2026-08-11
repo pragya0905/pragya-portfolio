@@ -48,6 +48,7 @@ export const handler = async (event) => {
 
   try {
     const result = await converse(messages);
+    logConversation(messages, result);
     return { statusCode: 200, headers: JSON_HEADERS, body: JSON.stringify(result) };
   } catch (err) {
     console.error(err);
@@ -63,6 +64,28 @@ export const handler = async (event) => {
 
 function textResponse(text) {
   return { status: "done", assistantMessage: { role: "assistant", content: [{ type: "text", text }] } };
+}
+
+// Kept in CloudWatch Logs rather than sent to GA4 — this is real visitor
+// free-text (possibly including a name), so it stays inside our own AWS
+// account instead of being shipped to a third party. Queryable via Logs
+// Insights: filter @message like /^conversation/. Answer text is capped —
+// it's just for reading what people ask, not a full transcript archive.
+function logConversation(messages, result) {
+  const lastUserText = [...messages]
+    .reverse()
+    .find((m) => m.role === "user" && m.content.some((b) => b.type === "text"))
+    ?.content.find((b) => b.type === "text")?.text;
+
+  if (!lastUserText) return; // e.g. a tool_result-only turn, not a real question
+
+  const answerText = (result.assistantMessage.content || [])
+    .filter((b) => b.type === "text")
+    .map((b) => b.text)
+    .join("\n")
+    .slice(0, 500);
+
+  console.log("conversation", JSON.stringify({ question: lastUserText, answer: answerText }));
 }
 
 async function converse(messages) {
