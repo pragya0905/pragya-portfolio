@@ -12,8 +12,8 @@ export const KNOWLEDGE_BASE = `
 
 **Founder & Software Engineer, Aurique Life** (June 2025 — Present, Remote)
 - Founded a digital wellness brand — single-handedly architected and launched a scalable e-commerce platform, achieving $5K ARR and 25% month-over-month growth.
-- Built the complete backend in Python (Flask) and AWS (DynamoDB, SQS, SNS, CloudWatch) to handle order state management, secure OTP authentication, and real-time metric tracking.
-- Engineered a high-performance, responsive frontend in React and TypeScript, using GSAP and Framer Motion for an immersive, scroll-driven storytelling UI — boosted brand engagement by 30%.
+- Built the complete backend in Python (Flask) and AWS (DynamoDB, SQS, SNS, CloudWatch) to handle order state management, secure OTP authentication (PyJWT), and real-time metric tracking — deployed via the Serverless Framework/CloudFormation for infrastructure-as-code, and tested with pytest/moto to verify AWS interactions without hitting live AWS.
+- Engineered a high-performance, responsive frontend in React and TypeScript, using GSAP and Framer Motion for an immersive, scroll-driven storytelling UI, plus React Three Fiber/Three.js for interactive 3D product showcases — boosted brand engagement by 30%.
 - Led end-to-end digital branding and technical SEO, integrating automated marketing workflows and a cohesive, minimalist design system across the platform.
 - This is her own company, not just an engineering role — she owns the whole thing: product, engineering, and business.
 
@@ -48,11 +48,11 @@ export const KNOWLEDGE_BASE = `
 **This portfolio website** — a static React + Vite + Tailwind CSS site, deployed on S3 behind CloudFront, with a serverless contact form (Web3Forms, with a honeypot spam filter) and a CloudWatch dashboard combining CloudFront's built-in infra metrics with a custom Lambda-published metric for contact-form success/failure. It's a real, deployed piece of her engineering work, not just a container for her resume.
 
 ## Skills (full list, by category)
-**Backend & Cloud:** Java, Python, C++, Node.js, AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CDK, CloudWatch, SQS, SNS, ECS), System Design, RESTful API Design, SQL (MySQL), PostgreSQL, Flask, Django, FastAPI, Spring Boot, Docker.
+**Backend & Cloud:** Java, Python, C++, Node.js, AWS (EC2, S3, Lambda, DynamoDB, CloudFront, IAM, SAM, CDK, CloudWatch, SQS, SNS, ECS), Serverless Framework, CloudFormation, System Design, RESTful API Design, SQL (MySQL), PostgreSQL, Flask, Django, FastAPI, Spring Boot, PyJWT, Docker.
 **AI & LLM Integration:** Claude API / Anthropic API, Prompt Engineering, LLM Integration, Ollama (local LLMs), RAG (Retrieval-Augmented Generation), Pydantic (structured LLM output validation).
-**Frontend:** React, JavaScript, HTML/CSS, TypeScript, Material UI, Tailwind CSS.
+**Frontend:** React, JavaScript, HTML/CSS, TypeScript, Material UI, Tailwind CSS, React Three Fiber, Three.js.
 **Data & Machine Learning:** Pandas, NumPy, Scikit-Learn, Matplotlib.
-**Engineering Tools:** Git, CI/CD, Lucidchart.
+**Engineering Tools:** Git, CI/CD, pytest, Lucidchart.
 **Design Tools:** Figma, Adobe Illustrator, Affinity.
 
 ## Certifications
