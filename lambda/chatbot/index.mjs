@@ -69,8 +69,9 @@ function textResponse(text) {
 // Kept in CloudWatch Logs rather than sent to GA4 — this is real visitor
 // free-text (possibly including a name), so it stays inside our own AWS
 // account instead of being shipped to a third party. Queryable via Logs
-// Insights: filter @message like /^conversation/. Answer text is capped —
-// it's just for reading what people ask, not a full transcript archive.
+// Insights: filter @message like /^conversation/. Full answer text, no
+// truncation — traffic volume here means the log cost is negligible, and a
+// cut-off mid-sentence answer defeats the point of being able to read it.
 function logConversation(messages, result) {
   const lastUserText = [...messages]
     .reverse()
@@ -82,8 +83,7 @@ function logConversation(messages, result) {
   const answerText = (result.assistantMessage.content || [])
     .filter((b) => b.type === "text")
     .map((b) => b.text)
-    .join("\n")
-    .slice(0, 500);
+    .join("\n");
 
   console.log("conversation", JSON.stringify({ question: lastUserText, answer: answerText }));
 }
