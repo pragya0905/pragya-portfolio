@@ -43,6 +43,20 @@ function textOf(content) {
     .trim();
 }
 
+// FAQ matches answer instantly client-side and never reach the Lambda, so
+// without this, "what are people asking" logs only ever captured
+// Claude-backed exchanges. Reuses the same /chat endpoint just to write the
+// log line — the Lambda skips Claude and the rate limiter entirely for
+// logOnly requests. Fire-and-forget, matching the contact-form metric's
+// pattern: a logging hiccup should never affect the UX the visitor already saw.
+function logFaqConversation(question, answer) {
+  fetch(CHATBOT_API_URL, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ logOnly: true, question, answer }),
+  }).catch(() => {});
+}
+
 export function useChat() {
   const [messages, setMessages] = useState([]);
   const [pending, setPending] = useState(false);
@@ -129,6 +143,7 @@ export function useChat() {
           { role: "assistant", content: [{ type: "text", text: faq.text }] },
         ];
         if (faq.action) runClientAction(faq.action);
+        logFaqConversation(trimmed, faq.text);
         return;
       }
 

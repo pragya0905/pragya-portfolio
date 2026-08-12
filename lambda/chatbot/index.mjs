@@ -21,6 +21,26 @@ export const handler = async (event) => {
     return { statusCode: 204, body: "" };
   }
 
+  let body;
+  try {
+    body = JSON.parse(event.body || "{}");
+  } catch {
+    body = {};
+  }
+
+  // The client-side FAQ layer answers instantly without ever reaching this
+  // Lambda, which meant "what are people asking" logs only ever captured
+  // Claude-backed exchanges — FAQ-only conversations were invisible. This
+  // reuses the same endpoint just to write the log line, skipping Claude
+  // entirely (the reply was already shown client-side) and skipping the
+  // rate limiter (no Anthropic spend at stake, nothing to protect here).
+  if (body.logOnly) {
+    if (typeof body.question === "string" && typeof body.answer === "string") {
+      console.log("conversation", JSON.stringify({ question: body.question, answer: body.answer, source: "faq" }));
+    }
+    return { statusCode: 204, body: "" };
+  }
+
   const sourceIp = event.requestContext?.http?.sourceIp;
   if (await isRateLimited(sourceIp)) {
     return {
@@ -34,13 +54,7 @@ export const handler = async (event) => {
     };
   }
 
-  let messages;
-  try {
-    const body = JSON.parse(event.body || "{}");
-    messages = Array.isArray(body.messages) ? body.messages : null;
-  } catch {
-    messages = null;
-  }
+  const messages = Array.isArray(body.messages) ? body.messages : null;
 
   if (!messages || messages.length === 0) {
     return { statusCode: 400, headers: JSON_HEADERS, body: JSON.stringify({ error: "messages required" }) };
@@ -85,7 +99,7 @@ function logConversation(messages, result) {
     .map((b) => b.text)
     .join("\n");
 
-  console.log("conversation", JSON.stringify({ question: lastUserText, answer: answerText }));
+  console.log("conversation", JSON.stringify({ question: lastUserText, answer: answerText, source: "claude" }));
 }
 
 async function converse(messages) {
