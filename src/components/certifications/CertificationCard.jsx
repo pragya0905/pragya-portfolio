@@ -1,10 +1,22 @@
 import { BadgeCheck, ExternalLink } from "lucide-react";
+import { ISSUER_ICONS } from "../../data/certIssuerIcons";
 
 export function CertificationCard({ name, issuer, date, url }) {
+  const entry = ISSUER_ICONS[issuer];
+  const Icon = entry?.type === "component" ? entry.icon : BadgeCheck;
+
   return (
     <div className="flex h-full flex-col justify-between gap-4 rounded-2xl border border-line bg-surface p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
       <div className="flex items-start gap-4">
-        <BadgeCheck className="h-8 w-8 shrink-0 text-accent" aria-hidden="true" />
+        {entry?.type === "image" ? (
+          <img src={entry.src} alt="" className="h-8 w-8 shrink-0 rounded object-contain" aria-hidden="true" />
+        ) : (
+          <Icon
+            className="h-8 w-8 shrink-0"
+            style={{ color: entry?.color ?? "var(--color-accent)" }}
+            aria-hidden="true"
+          />
+        )}
         <div className="min-w-0 flex-1">
           <h3 className="font-bold text-ink">{name}</h3>
           <p className="text-sm text-muted">{issuer}</p>
