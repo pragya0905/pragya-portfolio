@@ -13,6 +13,6 @@ export const ISSUER_ICONS = {
   Google: { type: "image", src: "/logos/google.svg" },
   IBM: { type: "image", src: "/logos/ibm.svg" },
   "Northwestern University": { type: "image", src: "/logos/northwestern.svg" },
-  "University of Illinois Urbana-Champaign": { type: "image", src: "/logos/illinois.svg" },
+  "University of Illinois Urbana-Champaign": { type: "image", src: "/logos/illinois-block-i.png" },
   "University of Michigan": { type: "image", src: "/logos/michigan.svg" },
 };
