@@ -273,7 +273,7 @@ export const PROJECTS = [
       "Built a personal life-tracking progressive web app on a serverless AWS backend with a React frontend, covering health, sleep, expense, task, and journal tracking — including AI-prioritized task management — integrated with the Claude API for AI-assisted insights.",
     metrics: [{ value: "5", label: "tracked domains: health, sleep, expenses, tasks, journal" }],
     tags: ["React", "AWS SAM", "Lambda", "API Gateway", "DynamoDB", "Claude API"],
-    links: { github: null, demo: null },
+    links: { github: null, demo: "https://d27z12rdh95fmx.cloudfront.net/" },
   },
   {
     title: "Portfolio Assistant Chatbot (PJ)",
