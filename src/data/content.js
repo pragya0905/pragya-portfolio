@@ -270,9 +270,12 @@ export const PROJECTS = [
     title: "LifeOS",
     context: "Personal Life-Tracking PWA",
     description:
-      "Built a personal life-tracking progressive web app on a serverless AWS backend with a React frontend, covering health, sleep, expense, task, and journal tracking — including AI-prioritized task management — integrated with the Claude API for AI-assisted insights.",
-    metrics: [{ value: "5", label: "tracked domains: health, sleep, expenses, tasks, journal" }],
-    tags: ["React", "AWS SAM", "Lambda", "API Gateway", "DynamoDB", "Claude API"],
+      "Architected a serverless life-tracking PWA where one journal sentence — not a form — drives everything: Claude extracts structured data and fans it out across 11 tracked domains in parallel, with deterministic guardrails so the model is never trusted with arithmetic, and per-user data isolation enforced at the schema level, not application logic.",
+    metrics: [
+      { value: "11", label: "tracked life domains" },
+      { value: "0", label: "GSIs — data isolation enforced at the schema level" },
+    ],
+    tags: ["React", "AWS SAM", "Lambda", "API Gateway", "DynamoDB", "Cognito", "Claude API"],
     links: { github: null, demo: "https://d27z12rdh95fmx.cloudfront.net/" },
   },
   {
