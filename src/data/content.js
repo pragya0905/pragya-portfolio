@@ -288,7 +288,7 @@ export const PROJECTS = [
       { value: "0", label: "cross-user data leaks — by design" },
       { value: "AI-forced", label: "priority — deadline math, not guesses" },
     ],
-    tags: ["React", "AWS SAM", "Lambda", "API Gateway", "DynamoDB", "Cognito", "Claude API"],
+    tags: ["React", "AWS SAM", "Lambda", "API Gateway", "DynamoDB", "Cognito", "S3", "CloudFront", "Claude API"],
     links: { github: null, demo: "https://d27z12rdh95fmx.cloudfront.net/" },
   },
   {
