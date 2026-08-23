@@ -283,7 +283,11 @@ export const PROJECTS = [
     context: "Personal Life-Tracking PWA",
     description:
       "Architected a serverless life-tracking PWA where one journal sentence — not a form — drives everything: Claude extracts structured data and fans it out across 11 tracked domains in parallel, with deterministic guardrails so the model is never trusted with arithmetic, and per-user data isolation enforced at the schema level, not application logic.",
-    metrics: [{ value: "11", label: "tracked life domains" }],
+    metrics: [
+      { value: "11", label: "tracked life domains" },
+      { value: "0", label: "cross-user data leaks — by design" },
+      { value: "AI-forced", label: "priority — deadline math, not guesses" },
+    ],
     tags: ["React", "AWS SAM", "Lambda", "API Gateway", "DynamoDB", "Cognito", "Claude API"],
     links: { github: null, demo: "https://d27z12rdh95fmx.cloudfront.net/" },
   },
