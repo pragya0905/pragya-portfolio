@@ -258,13 +258,25 @@ export const PROJECTS = [
     title: "JobPilot",
     context: "AI Job-Search Tool",
     description:
-      "Architected a local-first job-search pipeline running entirely on-device via Ollama — sourcing, scoring, and tailoring resumes across 6+ job sources at zero cloud cost, with structured LLM output validation and fabrication guardrails.",
+      "Built an end-to-end job-search pipeline that discovers leads across 6+ job boards and Gmail, tailors a resume and cover letter per posting with a locally-hosted LLM, and auto-updates application status by classifying incoming rejection/interview/assessment emails — no manual tracking required. Every AI-generated resume is scored for ATS compatibility and role fit before a human ever sees it, and the whole thing runs on-device with zero inference cost.",
     metrics: [
       { value: "6+", label: "job sources integrated" },
       { value: "$0", label: "cloud cost — fully on-device" },
+      { value: "Auto", label: "rejection/interview detection" },
     ],
-    tags: ["Python", "FastAPI", "SQLite", "Ollama", "Pydantic", "WeasyPrint"],
-    links: { github: null, demo: null },
+    tags: [
+      "Python",
+      "Flask",
+      "SQLAlchemy",
+      "React",
+      "TypeScript",
+      "Vite",
+      "Ollama",
+      "Gmail API (OAuth2 + PKCE)",
+      "AWS Lambda",
+      "S3",
+    ],
+    links: { github: null, demo: "https://d4echnhz4b9y4.cloudfront.net/" },
   },
   {
     title: "LifeOS",
