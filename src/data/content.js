@@ -126,6 +126,7 @@ export const CERTIFICATIONS = [
 export const EXPERIENCE = [
   {
     type: "work",
+    category: "experience",
     role: "Founder & Software Engineer",
     badge: "Founder",
     company: "Aurique Life",
@@ -154,6 +155,7 @@ export const EXPERIENCE = [
   },
   {
     type: "work",
+    category: "experience",
     role: "Software Development Engineer",
     badge: "SDE",
     company: "Amazon",
@@ -208,6 +210,7 @@ export const EXPERIENCE = [
   },
   {
     type: "work",
+    category: "internship",
     role: "Data Analyst Intern",
     company: "DivineAI",
     logoInitials: "DA",
@@ -225,6 +228,7 @@ export const EXPERIENCE = [
   },
   {
     type: "work",
+    category: "internship",
     role: "Web Development Intern",
     company: "HighRadius",
     logoInitials: "HR",
@@ -247,6 +251,7 @@ export const EXPERIENCE = [
   },
   {
     type: "education",
+    category: "education",
     role: "B.Tech, Computer Science & Engineering",
     company: "Kalinga Institute of Industrial Technology (KIIT)",
     logoInitials: "KIIT",
