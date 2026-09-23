@@ -136,18 +136,13 @@ export const EXPERIENCE = [
     achievements: [
       {
         description:
-          "Founded a digital wellness brand — single-handedly architected and launched a scalable e-commerce platform, building the complete backend in Python (Flask) and AWS (DynamoDB, SQS, SNS, CloudWatch) to handle order state management, secure OTP authentication, and real-time metric tracking.",
-        metric: { value: "$5K", label: "ARR, +25% MoM growth" },
+          "Founded a digital wellness brand — single-handedly architected and launched a scalable e-commerce platform end-to-end (architecture to product), building the complete backend in Python (Flask) and AWS (DynamoDB, SQS, SNS, CloudWatch) to handle order state management, secure OTP authentication, third-party delivery integration, and real-time metric tracking.",
+        metric: { value: "Solo", label: "architecture-to-product build, revenue-generating by Q1" },
       },
       {
         description:
-          "Engineered a high-performance, responsive frontend in React and TypeScript, leveraging GSAP and Framer Motion for an immersive, scroll-driven storytelling UI.",
+          "Engineered a high-performance, responsive frontend in React and TypeScript, leveraging GSAP and Framer Motion for an immersive, scroll-driven storytelling UI, maintaining 60fps scroll performance across devices.",
         metric: { value: "30%", label: "boost in brand engagement" },
-      },
-      {
-        description:
-          "Led end-to-end digital branding and technical SEO, integrating automated marketing workflows and a cohesive, minimalist design system across the platform.",
-        metric: { value: "Unified", label: "branding, SEO & marketing automation" },
       },
     ],
     techStack: ["React", "TypeScript", "Python", "Flask", "AWS", "DynamoDB", "SQS", "SNS", "CloudWatch", "GSAP", "Framer Motion"],
@@ -164,13 +159,13 @@ export const EXPERIENCE = [
     achievements: [
       {
         description:
-          "Architected a provenance-aware inventory removal system eliminating counterfeit-swap fraud on FBA orders across 100+ fulfillment centers (Java, Spring Boot, AWS), cutting return mismatches by 95%.",
-        metric: { value: "$5.5M", label: "annual fraud reduction" },
+          "Architected a provenance-aware inventory removal system eliminating counterfeit-swap fraud on FBA orders across 20+ fulfillment centers (Java, Spring Boot, AWS), achieving a 95% match rate.",
+        metric: { value: "95%", label: "match rate across 20+ fulfillment centers" },
       },
       {
         description:
-          "Re-architected a legacy EC2 polling service into an event-driven, serverless pipeline (Java, AWS CDK/TypeScript), migrating deprecated APIs and establishing robust failure-path routing.",
-        metric: { value: "Serverless", label: "event-driven EC2 migration" },
+          "Redesigned a legacy EC2 polling service into an event-driven, serverless pipeline on AWS Lambda and SQS (Java), decoupling from a deprecated internal API and establishing robust failure-path routing.",
+        metric: { value: "45%", label: "latency reduction" },
       },
       {
         description:
@@ -179,8 +174,13 @@ export const EXPERIENCE = [
       },
       {
         description:
-          "Led code and design reviews across projects, improving code quality and collaborating with cross-functional teams.",
+          "Led code and design reviews across 5 projects, improving code quality and collaborating with cross-functional teams.",
         metric: { value: "25%", label: "reduction in critical errors" },
+      },
+      {
+        description:
+          "Migrated critical returns-pipeline APIs from an EC2 monolith to microservices, driving cross-team dial-up, alarms, and CloudWatch dashboards.",
+        metric: { value: "Zero", label: "downtime — EC2 monolith to microservices migration" },
       },
     ],
     techStack: [
