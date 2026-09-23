@@ -11,17 +11,17 @@ export const KNOWLEDGE_BASE = `
 ## Work history (full detail)
 
 **Founder & Software Engineer, Aurique Life** (June 2025 — Present, Remote)
-- Founded a digital wellness brand — single-handedly architected and launched a scalable e-commerce platform, achieving $5K ARR and 25% month-over-month growth.
-- Built the complete backend in Python (Flask) and AWS (DynamoDB, SQS, SNS, CloudWatch) to handle order state management, secure OTP authentication (PyJWT), and real-time metric tracking — deployed via the Serverless Framework/CloudFormation for infrastructure-as-code, and tested with pytest/moto to verify AWS interactions without hitting live AWS.
-- Engineered a high-performance, responsive frontend in React and TypeScript, using GSAP and Framer Motion for an immersive, scroll-driven storytelling UI, plus React Three Fiber/Three.js for interactive 3D product showcases — boosted brand engagement by 30%.
-- Led end-to-end digital branding and technical SEO, integrating automated marketing workflows and a cohesive, minimalist design system across the platform.
+- Founded a digital wellness brand — single-handedly architected and launched a scalable e-commerce platform end-to-end (architecture to product), revenue-generating by Q1.
+- Built the complete backend in Python (Flask) and AWS (DynamoDB, SQS, SNS, CloudWatch) to handle order state management, secure OTP authentication (PyJWT), third-party delivery integration, and real-time metric tracking — deployed via the Serverless Framework/CloudFormation for infrastructure-as-code, and tested with pytest/moto to verify AWS interactions without hitting live AWS.
+- Engineered a high-performance, responsive frontend in React and TypeScript, using GSAP and Framer Motion for an immersive, scroll-driven storytelling UI, plus React Three Fiber/Three.js for interactive 3D product showcases — maintaining 60fps scroll performance across devices and boosting brand engagement by 30%.
 - This is her own company, not just an engineering role — she owns the whole thing: product, engineering, and business.
 
 **Software Development Engineer, Amazon** (January 2024 — May 2025, Hyderabad, India)
-- Architected a provenance-aware inventory removal system eliminating counterfeit-swap fraud on FBA orders across 100+ fulfillment centers (Java, Spring Boot, AWS), cutting return mismatches by 95% and reducing annual fraud by $5.5M.
-- Re-architected a legacy EC2 polling service into an event-driven, serverless pipeline (Java, AWS CDK/TypeScript) — migrated deprecated APIs and built robust failure-path routing, eliminating idle compute costs and improving shipment processing latency.
+- Architected a provenance-aware inventory removal system eliminating counterfeit-swap fraud on FBA orders across 20+ fulfillment centers (Java, Spring Boot, AWS), achieving a 95% match rate.
+- Redesigned a legacy EC2 polling service into an event-driven, serverless pipeline on AWS Lambda and SQS (Java) — decoupled from a deprecated internal API and established robust failure-path routing, cutting latency by 45%.
 - Designed and deployed a real-time observability pipeline for Live Site services: a Python worker on AWS ECS Fargate polling and filtering error logs into DynamoDB as a single source of truth, visualized through a React/TypeScript dashboard for faster root-cause triage. This dropped the fatal error rate from 90% to roughly 5%.
-- Led code and design reviews across projects, improving code quality and collaborating with cross-functional teams — cut critical errors by 25%.
+- Led code and design reviews across 5 projects, improving code quality and collaborating with cross-functional teams — cut critical errors by 25%.
+- Migrated critical returns-pipeline APIs from an EC2 monolith to microservices with zero downtime, driving cross-team dial-up, alarms, and CloudWatch dashboards.
 
 **Data Analyst Intern, DivineAI** (Bhubaneswar, India, June 2022 — September 2022)
 - Developed and deployed a real-time data analytics dashboard on AWS (Django, Power BI) and performed advanced statistical analysis (Python, Pandas, NumPy, Matplotlib), surfacing insights that improved operational visibility by 30%.
