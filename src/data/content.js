@@ -211,24 +211,6 @@ export const EXPERIENCE = [
   {
     type: "work",
     category: "internship",
-    role: "Data Analyst Intern",
-    company: "DivineAI",
-    logoInitials: "DA",
-    logoUrl: null,
-    location: "Bhubaneswar, India",
-    dates: "June 2022 — September 2022",
-    achievements: [
-      {
-        description:
-          "Developed and deployed an interactive data analytics dashboard using Django and Power BI on AWS, enabling real-time business monitoring. Performed data cleaning, visualization, and statistical analysis using Python (Pandas, NumPy, Matplotlib) to support data-driven decision-making and surface actionable business insights.",
-        metric: { value: "30%", label: "improvement in operational visibility" },
-      },
-    ],
-    techStack: ["Python", "Django", "Power BI", "AWS", "Pandas", "NumPy", "Matplotlib"],
-  },
-  {
-    type: "work",
-    category: "internship",
     role: "Web Development Intern",
     company: "HighRadius",
     logoInitials: "HR",
@@ -248,6 +230,24 @@ export const EXPERIENCE = [
       },
     ],
     techStack: ["React.js", "Java Servlets", "MySQL", "Python", "Scikit-learn"],
+  },
+  {
+    type: "work",
+    category: "internship",
+    role: "Data Analyst Intern",
+    company: "DivineAI",
+    logoInitials: "DA",
+    logoUrl: null,
+    location: "Bhubaneswar, India",
+    dates: "June 2022 — September 2022",
+    achievements: [
+      {
+        description:
+          "Developed and deployed an interactive data analytics dashboard using Django and Power BI on AWS, enabling real-time business monitoring. Performed data cleaning, visualization, and statistical analysis using Python (Pandas, NumPy, Matplotlib) to support data-driven decision-making and surface actionable business insights.",
+        metric: { value: "30%", label: "improvement in operational visibility" },
+      },
+    ],
+    techStack: ["Python", "Django", "Power BI", "AWS", "Pandas", "NumPy", "Matplotlib"],
   },
   {
     type: "education",
