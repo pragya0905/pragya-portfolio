@@ -8,7 +8,7 @@ export function SkillIconCard({ label }) {
   return (
     <div
       tabIndex={shortLabel ? 0 : undefined}
-      className="group relative flex flex-col items-center gap-3 rounded-2xl border border-accent/30 bg-surface/60 p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-[0_0_24px_-8px_var(--color-glow)] focus-visible:-translate-y-1 focus-visible:border-accent focus-visible:outline-none motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+      className="group relative flex flex-col items-center gap-3 rounded-2xl border border-accent/30 bg-surface/60 p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-[0_0_24px_-8px_var(--color-glow)] focus-visible:-translate-y-1 focus-visible:border-accent focus-visible:outline-none motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:p-6"
     >
       {Icon && <Icon className="h-10 w-10" style={{ color: entry.color }} aria-hidden="true" />}
       <span className="text-sm font-medium text-ink">{shortLabel ?? label}</span>
