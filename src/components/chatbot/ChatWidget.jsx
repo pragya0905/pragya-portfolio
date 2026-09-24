@@ -14,6 +14,8 @@ export function ChatWidget() {
   const { messages, pending, sendMessage } = useChat();
   const scrollRef = useRef(null);
   const openedAtRef = useRef(null);
+  const inputRef = useRef(null);
+  const toggleButtonRef = useRef(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -22,11 +24,35 @@ export function ChatWidget() {
   // A one-time, dismissible nudge — not an auto-opened panel, which reads
   // as pushy on a page a recruiter is skimming. Skipped entirely under
   // reduced motion, matching the rest of the site's reveal conventions.
+  // Also skipped if the visitor has already scrolled well past the Hero by
+  // the time it would fire, so it doesn't land on top of whatever section
+  // they're currently reading.
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = setTimeout(() => setShowCallout(true), 4000);
+    const timer = setTimeout(() => {
+      if (window.scrollY < window.innerHeight) setShowCallout(true);
+    }, 4000);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (open) {
+      inputRef.current?.focus();
+    } else if (hasOpened) {
+      // Only return focus to the toggle button on an actual close, not on
+      // initial mount (where `open` also starts false).
+      toggleButtonRef.current?.focus();
+    }
+  }, [open, hasOpened]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") toggleOpen();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -76,6 +102,7 @@ export function ChatWidget() {
       )}
 
       <button
+        ref={toggleButtonRef}
         type="button"
         onClick={toggleOpen}
         aria-label={open ? "Close chat" : "Open chat"}
@@ -112,13 +139,17 @@ export function ChatWidget() {
       </button>
 
       {open && (
-        <div className="fixed bottom-24 right-6 z-50 flex h-[34rem] w-[24rem] max-w-[calc(100vw-3rem)] flex-col overflow-hidden rounded-2xl border border-line bg-canvas shadow-2xl">
+        <div
+          role="dialog"
+          aria-labelledby="chat-widget-heading"
+          className="fixed bottom-24 right-6 z-50 flex h-[34rem] w-[24rem] max-w-[calc(100vw-3rem)] flex-col overflow-hidden rounded-2xl border border-line bg-canvas shadow-2xl"
+        >
           <div className="border-b border-line px-4 py-3">
-            <p className="text-sm font-bold text-ink">Ask about Pragya</p>
+            <p id="chat-widget-heading" className="text-sm font-bold text-ink">Ask about Pragya</p>
             <p className="text-xs text-muted">Usually replies instantly</p>
           </div>
 
-          <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
+          <div ref={scrollRef} role="log" aria-live="polite" className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
             <ChatMessage role="assistant" text={GREETING_TEXT} />
             {messages.length === 0 && (
               <div className="flex flex-wrap gap-2 pl-1">
@@ -148,6 +179,7 @@ export function ChatWidget() {
 
           <form onSubmit={handleSubmit} className="flex gap-2 border-t border-line p-3">
             <input
+              ref={inputRef}
               type="text"
               value={input}
               onChange={(event) => setInput(event.target.value)}
