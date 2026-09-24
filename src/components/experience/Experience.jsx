@@ -1,6 +1,7 @@
 import { EXPERIENCE } from "../../data/content";
 import { Section } from "../layout/Section";
 import { Timeline } from "./Timeline";
+import { AccordionList } from "./AccordionList";
 
 const experienceItems = EXPERIENCE.filter((item) => item.category === "experience");
 const internshipItems = EXPERIENCE.filter((item) => item.category === "internship");
@@ -22,7 +23,7 @@ export function ExperienceSection() {
 export function InternshipsSection() {
   return (
     <Section id="internships" eyebrow="Internships" heading="Where It Started">
-      <Timeline items={internshipItems} />
+      <AccordionList items={internshipItems} />
     </Section>
   );
 }
@@ -30,7 +31,7 @@ export function InternshipsSection() {
 export function EducationSection() {
   return (
     <Section id="education" eyebrow="Education" heading="Academic Foundation">
-      <Timeline items={educationItems} />
+      <AccordionList items={educationItems} />
     </Section>
   );
 }

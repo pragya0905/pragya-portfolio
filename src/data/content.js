@@ -127,35 +127,6 @@ export const EXPERIENCE = [
   {
     type: "work",
     category: "experience",
-    role: "Founder & Software Engineer",
-    badge: "Founder",
-    company: "Aurique Life",
-    logoInitials: "AL",
-    logoUrl: null,
-    location: "Remote",
-    dates: "June 2025 — Present",
-    achievements: [
-      {
-        description:
-          "Founded a digital wellness brand — single-handedly engineered and launched a scalable e-commerce platform end-to-end, from architecture to product.",
-        metric: { value: "Solo", label: "architecture-to-product build, revenue-generating by Q1" },
-      },
-      {
-        description:
-          "Engineered a high-performance, responsive frontend in React and TypeScript, leveraging GSAP and Framer Motion for an immersive, scroll-driven storytelling UI, maintaining 60fps scroll performance across devices.",
-        metric: { value: "30%", label: "boost in brand engagement" },
-      },
-      {
-        description:
-          "Designed the core backend in Python (Flask) handling order lifecycle, secure OTP authentication, third-party delivery integration, and state management across DynamoDB, SQS, and SNS.",
-        metric: { value: "3", label: "AWS services orchestrated: DynamoDB, SQS, SNS" },
-      },
-    ],
-    techStack: ["React", "TypeScript", "Python", "Flask", "AWS", "DynamoDB", "SQS", "SNS", "CloudWatch", "GSAP", "Framer Motion"],
-  },
-  {
-    type: "work",
-    category: "experience",
     role: "Software Development Engineer",
     badge: "SDE",
     company: "Amazon",
@@ -207,6 +178,35 @@ export const EXPERIENCE = [
       "AWS CDK",
       "CloudWatch",
     ],
+  },
+  {
+    type: "work",
+    category: "experience",
+    role: "Founder & Software Engineer",
+    badge: "Founder",
+    company: "Aurique Life",
+    logoInitials: "AL",
+    logoUrl: null,
+    location: "Remote",
+    dates: "June 2025 — Present",
+    achievements: [
+      {
+        description:
+          "Founded a digital wellness brand — single-handedly engineered and launched a scalable e-commerce platform end-to-end, from architecture to product.",
+        metric: { value: "Solo", label: "architecture-to-product build, revenue-generating by Q1" },
+      },
+      {
+        description:
+          "Engineered a high-performance, responsive frontend in React and TypeScript, leveraging GSAP and Framer Motion for an immersive, scroll-driven storytelling UI, maintaining 60fps scroll performance across devices.",
+        metric: { value: "30%", label: "boost in brand engagement" },
+      },
+      {
+        description:
+          "Designed the core backend in Python (Flask) handling order lifecycle, secure OTP authentication, third-party delivery integration, and state management across DynamoDB, SQS, and SNS.",
+        metric: { value: "3", label: "AWS services orchestrated: DynamoDB, SQS, SNS" },
+      },
+    ],
+    techStack: ["React", "TypeScript", "Python", "Flask", "AWS", "DynamoDB", "SQS", "SNS", "CloudWatch", "GSAP", "Framer Motion"],
   },
   {
     type: "work",
