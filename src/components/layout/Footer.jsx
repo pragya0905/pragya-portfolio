@@ -19,14 +19,14 @@ export function Footer() {
       id="contact"
       ref={ref}
       role="contentinfo"
-      className="scroll-mt-24 border-t border-line py-16"
+      className="scroll-mt-24 border-t border-line pt-16 pb-28 sm:pb-16"
     >
       <div className="mx-auto max-w-5xl px-6 text-center">
         <h2 className="text-3xl font-bold tracking-tight text-ink md:text-4xl">
           Let&rsquo;s build something.
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-muted">
-          Open to full-stack and cloud engineering opportunities. Reach out and
+          Open to backend, full-stack, and cloud engineering opportunities. Reach out and
           let&rsquo;s talk.
         </p>
 

@@ -9,7 +9,7 @@ export function CertificationCard({ name, issuer, date, url }) {
     <div className="flex h-full flex-col justify-between gap-4 rounded-2xl border border-line bg-surface p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
       <div className="flex items-start gap-4">
         {entry?.type === "image" ? (
-          <img src={entry.src} alt="" className="h-8 w-8 shrink-0 rounded object-contain" aria-hidden="true" />
+          <img src={entry.src} alt={`${issuer} logo`} className="h-8 w-8 shrink-0 rounded object-contain" />
         ) : (
           <Icon
             className="h-8 w-8 shrink-0"
