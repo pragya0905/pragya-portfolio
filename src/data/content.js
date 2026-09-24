@@ -7,13 +7,13 @@ export const PROFILE = {
   // Drives the Hero's typing animation. `tagline` above remains the
   // accessible fallback read by screen readers.
   taglineSequence: [
-    "I build cloud-native platforms.",
+    "Backend engineer turned startup founder.",
     2000,
-    "I architect Amazon-scale backend systems.",
+    "95% fraud-match rate across 20+ fulfillment centers.",
     2000,
-    "I prevented $5.5M in annual fraud at Amazon",
+    "Founded Aurique Life — architecture to product, solo.",
     2000,
-    "I built the end-to-end digital experience for Aurique Life.",
+    "Open to full-stack, cloud & AI engineering roles.",
     2000,
   ],
   photoUrl: "/profile-photo.webp",
