@@ -54,10 +54,22 @@ export function Hero() {
               cursor
               className="min-h-[3.5rem] text-lg text-muted"
             />
-            <p className="mt-4 flex items-center gap-2 text-sm text-faint">
-              <MapPin className="h-4 w-4" aria-hidden="true" />
-              {PROFILE.location}
-            </p>
+            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-faint">
+              <p className="flex items-center gap-2">
+                <MapPin className="h-4 w-4" aria-hidden="true" />
+                {PROFILE.location}
+              </p>
+              <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-dim px-3 py-1 font-mono text-xs text-accent">
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span
+                    aria-hidden="true"
+                    className="chat-trigger-pulse absolute inset-0 rounded-full border border-accent"
+                  />
+                  <span aria-hidden="true" className="relative h-2 w-2 rounded-full bg-accent" />
+                </span>
+                Open to opportunities
+              </span>
+            </div>
           </div>
 
           <div className={clsx("flex flex-wrap gap-4", reveal("delay-[100ms]"))}>
