@@ -7,7 +7,7 @@ export const PROFILE = {
   // Drives the Hero's typing animation. `tagline` above remains the
   // accessible fallback read by screen readers.
   taglineSequence: [
-    "Founded a startup — and still writes the code.",
+    "Backend engineer who founded a startup — and still writes the code.",
     2000,
     "95% fraud-match rate across 20+ fulfillment centers.",
     2000,
