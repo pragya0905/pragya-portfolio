@@ -11,7 +11,7 @@ export const PROFILE = {
     2000,
     "95% fraud-match rate across 20+ fulfillment centers.",
     2000,
-    "Founded Aurique Life — architecture to product, solo.",
+    "Founded Aurique Life — architecture to production, solo.",
     2000,
     "Open to full-stack, cloud & AI engineering roles.",
     2000,
